@@ -46,6 +46,9 @@ class _OrderPageState extends State<OrderPage> {
             widget.item.cook.address,
             type: Type.subtitle,
           ),
+          SizedBox(
+            height: 16,
+          ),
           Divider(),
           SpacedRow(
             ThemedText('Order Quantity'),

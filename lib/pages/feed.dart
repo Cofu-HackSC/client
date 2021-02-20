@@ -35,6 +35,7 @@ class _FeedPageState extends State<FeedPage> {
           address: '1234 ThisIsThe Way, Some City',
           emailContact: true,
           contact: 'jason.telanoff@gmail.com',
+          id: 'asdfje',
         ),
       ),
     ];

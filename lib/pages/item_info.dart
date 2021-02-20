@@ -6,6 +6,8 @@ import 'package:app/pages/order.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import 'cook_profile.dart';
+
 class ItemInfoPage extends StatefulWidget {
   final Item item;
   ItemInfoPage({@required this.item});
@@ -63,15 +65,19 @@ class _ItemInfoPageState extends State<ItemInfoPage> {
                     '${widget.item.delivery ? widget.item.pickup ? 'Delivery and Pickup' : 'Delivery' : widget.item.pickup ? 'Pickup' : 'Error'}'),
                 Divider(),
                 TextButton(
-                  onPressed: () {
-                    // Go to the profile
-                  },
+                  onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (c) => CookProfilePage(widget.item.cook))),
                   child: Row(
                     children: [
-                      ClipOval(
-                        child: Image.asset(
-                          'assets/example_profile.jpg',
-                          height: 70,
+                      Hero(
+                        tag: widget.item.cook.id,
+                        child: ClipOval(
+                          child: Image.asset(
+                            'assets/example_profile.jpg',
+                            height: 70,
+                          ),
                         ),
                       ),
                       SizedBox(width: 16),
