@@ -4,9 +4,11 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;
   final Widget trailing;
+  final void Function(String) onSubmit;
   CustomTextField({
     @required this.controller,
     @required this.labelText,
+    this.onSubmit,
     this.trailing,
   });
 
@@ -18,6 +20,7 @@ class CustomTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         child: TextField(
           controller: controller,
+          onSubmitted: onSubmit,
           decoration: InputDecoration(
             labelText: labelText,
             border: InputBorder.none,
