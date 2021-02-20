@@ -5,6 +5,8 @@ import 'package:app/pages/settings.dart';
 import 'package:flutter/material.dart';
 
 import 'feed.dart';
+import 'order.dart';
+import 'orders.dart';
 
 class HomePage extends StatefulWidget {
   final Session session;
@@ -41,7 +43,7 @@ class _HomePageState extends State<HomePage> {
             case 0:
               return FeedPage();
             case 1:
-              return Container();
+              return OrdersPage();
             default:
               return SettingsPage();
           }
