@@ -32,9 +32,11 @@ class LoginPage extends StatelessWidget {
       body: Scaffold(
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          child: ListView(
             children: [
+              SizedBox(
+                height: 16,
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
@@ -46,6 +48,9 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 4,
+              ),
               Column(
                 children: [
                   CustomTextField(
@@ -53,6 +58,9 @@ class LoginPage extends StatelessWidget {
                   CustomTextField(
                       controller: passwordController, labelText: 'Password'),
                 ],
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 4,
               ),
               Column(
                 children: [
