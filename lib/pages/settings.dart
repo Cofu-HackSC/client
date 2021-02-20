@@ -4,6 +4,8 @@ import 'package:app/components/themed_text.dart';
 import 'package:app/pages/login/login.dart';
 import 'package:flutter/material.dart';
 
+import 'register_as_cook.dart';
+
 class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,10 @@ class SettingsPage extends StatelessWidget {
                           builder: (c) => LoginPage(),
                         ),
                       )),
+              ListTile(
+                  title: Text('Register as Cook'),
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (c) => CookSignUpPage()))),
             ],
           ),
         ),
