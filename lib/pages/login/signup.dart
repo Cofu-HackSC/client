@@ -60,8 +60,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: Button(
                     'Sign Up',
-                    onPressed: () {
-                      createAlbum();
+                    onPressed: () async {
+                      var response = await createAlbum();
+                      print(response.body);
                     },
                   ),
                 )

@@ -30,83 +30,54 @@ class LoginPage extends StatelessWidget {
       defaultPanelState: PanelState.CLOSED,
       panel: SignUpPage(),
       body: Scaffold(
-        body: Stack(
-          children: [
-            Column(
-              children: [
-                Image.asset(
-                  'assets/example_img.jpg',
-                  fit: BoxFit.cover,
-                  height: MediaQuery.of(context).size.height - 300,
-                ),
-                Container(
-                  color: Colors.white,
-                  height: 300,
-                ),
-              ],
-            ),
-            CustomScrollView(
-              reverse: true,
-              slivers: [
-                SliverToBoxAdapter(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40),
-                      topRight: Radius.circular(40),
-                    ),
-                    child: Container(
-                      color: Colors.white,
-                      height: 400,
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              'COFU',
-                              style: TextStyle(
-                                fontSize: 40,
-                              ),
-                            ),
-                          ),
-                          CustomTextField(
-                              controller: usernameController,
-                              labelText: 'Username'),
-                          CustomTextField(
-                              controller: passwordController,
-                              labelText: 'Password'),
-                          SizedBox(height: 16),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: Button(
-                                'Sign In',
-                                onPressed: () async {
-                                  var returnThing = await createAlbum();
-                                  print(returnThing);
-                                },
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(8),
-                            child: SelectableText(
-                              'Sign Up',
-                              onTap: () => panelController.open(),
-                              style: TextStyle(
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 8),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ThemedText(
+                    'Welcome Back',
+                    type: Type.h1,
+                    textAlign: TextAlign.left,
                   ),
                 ),
-              ],
-            ),
-          ],
+              ),
+              Column(
+                children: [
+                  CustomTextField(
+                      controller: usernameController, labelText: 'Username'),
+                  CustomTextField(
+                      controller: passwordController, labelText: 'Password'),
+                ],
+              ),
+              Column(
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    child: Button(
+                      'Sign In',
+                      onPressed: () async {
+                        var returnThing = await createAlbum();
+                        print(returnThing);
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  TextButton(
+                    child: ThemedText(
+                      'Sign Up',
+                      type: Type.subtitle,
+                    ),
+                    onPressed: () => panelController.open(),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
