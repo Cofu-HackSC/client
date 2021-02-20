@@ -4,15 +4,19 @@ import 'dart:ui';
 import 'package:app/components/button.dart';
 import 'package:app/components/custom_text_field.dart';
 import 'package:app/components/themed_text.dart';
+import 'package:app/models/session.dart';
 import 'package:app/pages/login/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:http/http.dart' as http;
 
 class LoginPage extends StatelessWidget {
+  final Session session;
   final TextEditingController usernameController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
   final PanelController panelController = new PanelController();
+
+  LoginPage({@required this.session});
 
   String get username => usernameController.text;
   String get password => passwordController.text;
@@ -26,7 +30,9 @@ class LoginPage extends StatelessWidget {
       maxHeight: MediaQuery.of(context).size.height * 0.9,
       borderRadius: BorderRadius.circular(40),
       defaultPanelState: PanelState.CLOSED,
-      panel: SignUpPage(),
+      panel: SignUpPage(
+        session: session,
+      ),
       body: Scaffold(
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -67,8 +73,7 @@ class LoginPage extends StatelessWidget {
                     child: Button(
                       'Sign In',
                       onPressed: () async {
-                        var returnThing = await createAlbum();
-                        print(returnThing);
+                        await login(context);
                       },
                     ),
                   ),
@@ -89,14 +94,25 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Future<http.Response> createAlbum() {
-    return http.post(
+  Future<void> login(BuildContext context) {
+    return http
+        .post(
       'https://cofu-305406.wl.r.appspot.com/auth/signin',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(
           <String, String>{'username': username, 'password': password}),
-    );
+    )
+        .then((value) {
+      switch (value.statusCode) {
+        case 200:
+          session.fromSetCookie(value.headers['set-cookie']);
+          return Navigator.of(context).pushNamed('/home');
+        default:
+          print(value.body);
+          print(value.statusCode);
+      }
+    });
   }
 }
