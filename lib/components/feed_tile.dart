@@ -16,12 +16,15 @@ class FeedTile extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: TextButton(
         onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (c) => ItemInfoPage(
-                      item: item,
-                      cook: cook,
-                    ))),
+          context,
+          MaterialPageRoute(
+            fullscreenDialog: true,
+            builder: (c) => ItemInfoPage(
+              item: item,
+              cook: cook,
+            ),
+          ),
+        ),
         style: TextButton.styleFrom(
             backgroundColor: AppTheme.backgroundLighGray,
             shape: RoundedRectangleBorder(
