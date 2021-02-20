@@ -31,7 +31,7 @@ class LoginPage extends StatelessWidget {
       panel: SignUpPage(),
       body: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
