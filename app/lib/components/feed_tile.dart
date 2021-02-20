@@ -1,18 +1,26 @@
 import 'package:app/components/themed_text.dart';
 import 'package:app/global/app_theme.dart';
+import 'package:app/models/item.dart';
+import 'package:app/pages/item_info.dart';
 import 'package:flutter/material.dart';
 
 class FeedTile extends StatelessWidget {
+  final Item item;
+  FeedTile(this.item);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(22.0),
-      child: Card(
-        color: AppTheme.backgroundLighGray,
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+      padding: const EdgeInsets.all(16),
+      child: TextButton(
+        onPressed: () => Navigator.push(
+            context, MaterialPageRoute(builder: (c) => ItemInfoPage(item))),
+        style: TextButton.styleFrom(
+            backgroundColor: AppTheme.backgroundLighGray,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            padding: EdgeInsets.zero),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: Column(
@@ -30,17 +38,29 @@ class FeedTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ThemedText(
-                      'Homemade Pretzels',
+                      item.name,
                       type: Type.h2,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ThemedText(
-                          'Delivery and Pickup',
+                          '${item.delivery ? item.pickup ? 'Delivery and Pickup' : 'Delivery' : item.pickup ? 'Pickup' : 'Error'}',
                           type: Type.subtitle,
                         ),
-                        Stars(4.2),
+                        Row(
+                          children: [
+                            ThemedText(
+                              item.avgItemRating.toString(),
+                              type: Type.subtitle,
+                            ),
+                            Icon(
+                              Icons.star_rounded,
+                              size: 16,
+                              color: AppTheme.star,
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ],
@@ -50,28 +70,6 @@ class FeedTile extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class Stars extends StatelessWidget {
-  final double stars;
-  Stars(this.stars);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        ThemedText(
-          stars.toString(),
-          type: Type.subtitle,
-        ),
-        Icon(
-          Icons.star_rounded,
-          size: 16,
-          color: AppTheme.star,
-        ),
-      ],
     );
   }
 }
