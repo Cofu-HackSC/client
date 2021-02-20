@@ -39,7 +39,7 @@ class _ApplicationState extends State<Application> {
                 Button('Click here to upload your license', onPressed: () {
                   ImagePicker()
                       .getImage(source: ImageSource.camera)
-                      .then((value) {
+                      .then((value) async {
                     MultipartRequest req = MultipartRequest(
                       'POST',
                       Uri.parse(
@@ -57,6 +57,20 @@ class _ApplicationState extends State<Application> {
                         filename: value.path.split("/").last,
                       ),
                     );
+                    var res = await req.send();
+
+                    print('RESPONSE');
+                    print(res.statusCode);
+                    print(res.reasonPhrase);
+                    res.stream.listen((value) {
+                      print('STREAMING: ' + DateTime.now().toIso8601String());
+                      print(value);
+                    });
+
+                    await res.stream
+                        .drain()
+                        .then((value) => print(value))
+                        .then((value) => Navigator.pop(context));
                   });
                 })
               ],
