@@ -1,4 +1,5 @@
 import 'package:app/models/session.dart';
+import 'package:app/global/app_theme.dart';
 import 'package:app/pages/home.dart';
 import 'package:app/pages/login/login.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: AppTheme.primary,
       ),
       builder: (c, w) => Provider(
         create: (c) => Session(),

@@ -1,7 +1,5 @@
-import 'package:app/components/button.dart';
-import 'package:app/components/header.dart';
-import 'package:app/models/cook_profile.dart';
 import 'package:app/models/session.dart';
+import 'package:app/global/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:app/pages/settings.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +20,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
+          activeColor: AppTheme.primary,
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
