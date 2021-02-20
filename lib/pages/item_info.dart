@@ -1,5 +1,4 @@
 import 'package:app/components/button.dart';
-import 'package:app/components/header.dart';
 import 'package:app/components/themed_text.dart';
 import 'package:app/global/app_theme.dart';
 import 'package:app/models/cook_profile.dart';
@@ -106,10 +105,13 @@ class ItemInfoPage extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Image.asset(
-            'assets/example_img.jpg',
-            fit: BoxFit.cover,
-            height: double.infinity,
+          Hero(
+            child: Image.asset(
+              'assets/example_img.jpg',
+              fit: BoxFit.cover,
+              height: double.infinity,
+            ),
+            tag: item.itemID,
           ),
           AppBar(
             automaticallyImplyLeading: false,

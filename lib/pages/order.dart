@@ -47,7 +47,7 @@ class _OrderPageState extends State<OrderPage> {
                 ),
                 ThemedText(quantity.toString()),
                 IconButton(
-                  icon: Icon(Icons.chevron),
+                  icon: Icon(Icons.chevron_right),
                   onPressed: () => setState(() => quantity--),
                 ),
               ]),
