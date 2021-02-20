@@ -1,6 +1,8 @@
 import 'package:app/components/header.dart';
 import 'package:flutter/material.dart';
 
+import 'register_as_cook.dart';
+
 class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
