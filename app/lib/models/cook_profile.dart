@@ -1,4 +1,7 @@
+import 'dart:html';
+
 import 'package:app/models/user.dart';
+import 'package:flutter/foundation.dart';
 
 class CookProfile extends User {
   String insuranceProofURI, foodLicenseURI, deliveryDistance;
@@ -7,25 +10,21 @@ class CookProfile extends User {
     this.insuranceProofURI,
     this.foodLicenseURI,
     this.deliveryDistance,
-    id,
-    name,
-    bio,
-    photoURL,
-    address,
-    provider,
-    providerID,
-    location,
-    isCook,
-    emailContact,
-    contact,
+    @required String id,
+    @required String name,
+    @required String bio,
+    @required String photoURL,
+    @required String address,
+    @required String location,
+    @required bool isCook,
+    @required bool emailContact,
+    @required String contact,
   }) : super(
           id: id,
           name: name,
           bio: bio,
           photoURL: photoURL,
           address: address,
-          provider: provider,
-          providerID: providerID,
           location: location,
           isCook: isCook,
           emailContact: emailContact,
