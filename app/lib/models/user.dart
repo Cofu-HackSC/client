@@ -1,9 +1,9 @@
 class User {
-  String id, name, bio, photoURL, address, provider, providerID, location;
-  bool emailContact;
-  String contact;
+  final String id, name, bio, photoURL, address, location;
+  final bool emailContact;
+  final String contact;
 
-  User({
+  const User({
     this.id,
     this.name,
     this.bio,
