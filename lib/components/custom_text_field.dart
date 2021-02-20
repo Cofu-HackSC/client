@@ -14,14 +14,18 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-      child: TextField(
-        controller: controller,
-        decoration: InputDecoration(
-          labelText: labelText,
-          fillColor: Colors.grey[300],
-          filled: true,
-          suffixIcon: trailing,
-          labelStyle: TextStyle(color: Colors.black),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(14),
+        child: TextField(
+          controller: controller,
+          decoration: InputDecoration(
+            labelText: labelText,
+            border: InputBorder.none,
+            fillColor: Colors.grey[300],
+            filled: true,
+            suffixIcon: trailing,
+            labelStyle: TextStyle(color: Colors.black),
+          ),
         ),
       ),
     );

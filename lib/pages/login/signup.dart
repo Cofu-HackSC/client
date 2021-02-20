@@ -50,6 +50,12 @@ class _SignUpPageState extends State<SignUpPage> {
                 CustomTextField(
                   controller: addressController,
                   labelText: 'Address',
+                  trailing: IconButton(
+                    icon: Icon(
+                      Icons.location_pin,
+                    ),
+                    onPressed: () {},
+                  ),
                 ),
                 CustomTextField(
                   controller: passwordController,
