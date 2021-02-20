@@ -1,8 +1,6 @@
-import 'dart:html';
-
 class User {
   String id, name, bio, photoURL, address;
-  Geolocation location;
+  String location;
   bool isCook, emailContact;
   String contact;
 

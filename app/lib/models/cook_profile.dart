@@ -15,7 +15,7 @@ class CookProfile extends User {
     @required String bio,
     @required String photoURL,
     @required String address,
-    @required Geolocation location,
+    @required String location,
     @required bool isCook,
     @required bool emailContact,
     @required String contact,
