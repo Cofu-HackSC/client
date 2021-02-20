@@ -9,14 +9,19 @@ class SettingsPage extends StatelessWidget {
       slivers: [
         Header('Settings'),
         SliverList(
-          delegate: SliverChildListDelegate([
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Button('Sign Out', onPressed: () {
-                print('no');
-              }),
-            )
-          ]),
+          delegate: SliverChildListDelegate(
+            [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Button(
+                  'Sign Out',
+                  onPressed: () {
+                    print('no');
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );

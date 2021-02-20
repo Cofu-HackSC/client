@@ -1,3 +1,4 @@
+import 'package:app/components/feed_tile.dart';
 import 'package:app/components/header.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,11 @@ class _FeedPageState extends State<FeedPage> {
             child: CupertinoSearchTextField(),
           ),
         ),
+        SliverList(
+          delegate: SliverChildListDelegate([
+            FeedTile(),
+          ]),
+        )
       ],
     );
   }
