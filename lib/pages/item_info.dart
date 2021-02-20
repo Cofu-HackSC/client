@@ -6,22 +6,43 @@ import 'package:app/pages/order.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-class ItemInfoPage extends StatelessWidget {
+class ItemInfoPage extends StatefulWidget {
   final Item item;
   ItemInfoPage({@required this.item});
+
+  @override
+  _ItemInfoPageState createState() => _ItemInfoPageState();
+}
+
+class _ItemInfoPageState extends State<ItemInfoPage> {
+  PanelController controller;
+
+  @override
+  void initState() {
+    controller = new PanelController();
+    openPanel();
+    super.initState();
+  }
+
+  void openPanel() async {
+    await Future.delayed(const Duration(milliseconds: 300));
+    controller.open();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SlidingUpPanel(
+      isDraggable: false,
+      controller: controller,
       margin: EdgeInsets.symmetric(horizontal: 8),
       borderRadius: BorderRadius.only(
           topLeft: Radius.circular(16), topRight: Radius.circular(16)),
       color: AppTheme.backgroundLighGray,
-      minHeight: 470,
+      minHeight: 0,
       maxHeight: 570,
       parallaxEnabled: true,
-      parallaxOffset: 0.2,
+      parallaxOffset: 0.02,
       padding: EdgeInsets.only(top: 16),
       panel: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,14 +53,14 @@ class ItemInfoPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ThemedText(
-                  item.name,
+                  widget.item.name,
                   type: Type.h1,
                 ),
-                Stars(item.avgItemRating),
+                Stars(widget.item.avgItemRating),
                 Divider(),
-                ThemedText('\$' + item.cost.toStringAsFixed(2)),
+                ThemedText('\$' + widget.item.cost.toStringAsFixed(2)),
                 ThemedText(
-                    '${item.delivery ? item.pickup ? 'Delivery and Pickup' : 'Delivery' : item.pickup ? 'Pickup' : 'Error'}'),
+                    '${widget.item.delivery ? widget.item.pickup ? 'Delivery and Pickup' : 'Delivery' : widget.item.pickup ? 'Pickup' : 'Error'}'),
                 Divider(),
                 TextButton(
                   onPressed: () {
@@ -57,7 +78,7 @@ class ItemInfoPage extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ThemedText(item.cook.name),
+                          ThemedText(widget.item.cook.name),
                           ThemedText('View more from this chef >',
                               type: Type.subtitle),
                         ],
@@ -67,13 +88,13 @@ class ItemInfoPage extends StatelessWidget {
                 ),
                 Divider(),
                 ThemedText(
-                  item.description,
+                  widget.item.description,
                   type: Type.subtitle,
                   textAlign: TextAlign.left,
                 ),
                 Divider(),
                 ThemedText(
-                  item.ingredients,
+                  widget.item.ingredients,
                   type: Type.subtitle,
                   textAlign: TextAlign.left,
                 ),
@@ -83,8 +104,13 @@ class ItemInfoPage extends StatelessWidget {
                   width: double.infinity,
                   child: Button(
                     'Reserve Pickup',
-                    onPressed: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (c) => OrderPage(item))),
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (c) => OrderPage(
+                                  widget.item,
+                                  pickup: true,
+                                ))),
                   ),
                 ),
                 SizedBox(height: 12),
@@ -92,9 +118,13 @@ class ItemInfoPage extends StatelessWidget {
                   width: double.infinity,
                   child: Button(
                     'Order for Delivery',
-                    onPressed: () {
-                      // Order Delivery
-                    },
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (c) => OrderPage(
+                                  widget.item,
+                                  pickup: false,
+                                ))),
                   ),
                 ),
               ],
@@ -110,7 +140,7 @@ class ItemInfoPage extends StatelessWidget {
               fit: BoxFit.cover,
               height: double.infinity,
             ),
-            tag: item.itemID,
+            tag: widget.item.itemID,
           ),
           AppBar(
             automaticallyImplyLeading: false,
