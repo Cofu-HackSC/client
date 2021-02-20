@@ -46,6 +46,10 @@ class SignUpPage extends StatelessWidget {
             CustomTextField(
               controller: addressController,
               labelText: 'Address',
+              trailing: IconButton(
+                icon: Icon(Icons.location_pin),
+                onPressed: () {},
+              ),
             ),
             CustomTextField(
               controller: passwordController,
