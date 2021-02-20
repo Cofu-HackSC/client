@@ -5,22 +5,40 @@ import 'package:app/models/item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class FeedPage extends StatelessWidget {
-  final List<Item> items = [
-    new Item(
-      itemID: 'sdgsdgsdgesr',
-      sellerID: 'sdgsdg',
-      photoURL: 'sdg',
-      name: 'Jason\'s Pretzels',
-      avgItemRating: 4.6,
-      delivery: true,
-      pickup: true,
-      ingredients: 'Flour, Milk, Yeast, Olive Oil, Sugar, Salt, Baking Soda',
-      description: 'A yummy yummy for your tummy treat made by yours truely.',
-      cost: 1.60,
-      stock: 16,
-    )
-  ];
+class FeedPage extends StatefulWidget {
+  @override
+  _FeedPageState createState() => _FeedPageState();
+}
+
+class _FeedPageState extends State<FeedPage> {
+  List<Item> items;
+
+  @override
+  void initState() {
+    super.initState();
+    items = [
+      new Item(
+        itemID: 'sdgsdgsdgesr',
+        sellerID: 'sdgsdg',
+        photoURL: 'sdg',
+        name: 'Jason\'s Pretzels',
+        avgItemRating: 4.6,
+        delivery: true,
+        pickup: true,
+        ingredients: 'Flour, Milk, Yeast, Olive Oil, Sugar, Salt, Baking Soda',
+        description: 'A yummy yummy for your tummy treat made by yours truely.',
+        cost: 1.60,
+        stock: 16,
+        cook: CookProfile(
+          name: 'Jason Telanoff',
+          bio: 'Likes Eating... A lot',
+          address: '1234 ThisIsThe Way',
+          emailContact: true,
+          contact: 'jason.telanoff@gmail.com',
+        ),
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,17 +54,18 @@ class FeedPage extends StatelessWidget {
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (c, i) => FeedTile(
-                item: items[i],
-                cook: new CookProfile(
-                    name: 'Jason Telanoff',
-                    bio: 'Likes Eating... A lot',
-                    address: '1234 ThisIsThe Way',
-                    emailContact: true,
-                    contact: 'jason.telanoff@gmail.com')),
+              item: items[i],
+            ),
             childCount: items.length,
           ),
         )
       ],
     );
   }
+}
+
+enum LoadState {
+  Error,
+  Loading,
+  Loaded,
 }

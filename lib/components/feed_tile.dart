@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 
 class FeedTile extends StatelessWidget {
   final Item item;
-  final CookProfile cook;
-  FeedTile({@required this.item, @required this.cook});
+  FeedTile({@required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +20,6 @@ class FeedTile extends StatelessWidget {
             fullscreenDialog: true,
             builder: (c) => ItemInfoPage(
               item: item,
-              cook: cook,
             ),
           ),
         ),

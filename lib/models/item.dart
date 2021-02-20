@@ -1,3 +1,4 @@
+import 'package:app/models/cook_profile.dart';
 import 'package:flutter/foundation.dart';
 
 class Item {
@@ -5,6 +6,8 @@ class Item {
   double cost, avgItemRating;
   int stock;
   bool delivery, pickup;
+
+  CookProfile cook;
 
   Item({
     @required this.itemID,
@@ -18,5 +21,6 @@ class Item {
     @required this.stock,
     @required this.delivery,
     @required this.pickup,
+    @required this.cook,
   });
 }

@@ -1,5 +1,7 @@
 import 'package:app/components/button.dart';
 import 'package:app/components/header.dart';
+import 'package:app/components/themed_text.dart';
+import 'package:app/pages/login.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -11,15 +13,16 @@ class SettingsPage extends StatelessWidget {
         SliverList(
           delegate: SliverChildListDelegate(
             [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Button(
-                  'Sign Out',
-                  onPressed: () {
-                    print('no');
-                  },
-                ),
-              ),
+              ListTile(
+                  title: Text('Sign Out'),
+                  subtitle: Text(
+                    'We\'ll miss you🥺',
+                  ),
+                  onTap: () => Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (c) => LoginPage(),
+                        ),
+                      )),
             ],
           ),
         ),
