@@ -7,8 +7,12 @@ class ThemedText extends StatelessWidget {
   final TextAlign textAlign;
   final Color color;
 
-  const ThemedText(this.text,
-      {this.type = Type.body, this.textAlign = TextAlign.center, this.color});
+  const ThemedText(
+    this.text, {
+    this.type = Type.body,
+    this.textAlign = TextAlign.center,
+    this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
