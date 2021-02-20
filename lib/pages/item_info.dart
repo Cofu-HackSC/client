@@ -89,6 +89,7 @@ class ItemInfoPage extends StatelessWidget {
                         MaterialPageRoute(builder: (c) => OrderPage(item))),
                   ),
                 ),
+                SizedBox(height: 12),
                 SizedBox(
                   width: double.infinity,
                   child: Button(

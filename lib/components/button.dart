@@ -30,6 +30,7 @@ class Button extends StatelessWidget {
       style: buttonStyleOverides.merge(
         TextButton.styleFrom(
           backgroundColor: color ?? backgroundColor,
+          padding: EdgeInsets.all(12),
           shape: shape,
         ),
       ),
@@ -39,7 +40,7 @@ class Button extends StatelessWidget {
   Color get backgroundColor {
     switch (style) {
       case Style.Primary:
-        return AppTheme.primary;
+        return Colors.black;
       case Style.Secondary:
         return AppTheme.primary;
       default:
