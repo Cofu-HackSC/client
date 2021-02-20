@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:app/components/button.dart';
 import 'package:app/components/header.dart';
 import 'package:app/components/themed_text.dart';
 import 'package:app/models/session.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 
 class Application extends StatefulWidget {
@@ -36,7 +39,25 @@ class _ApplicationState extends State<Application> {
                 Button('Click here to upload your license', onPressed: () {
                   ImagePicker()
                       .getImage(source: ImageSource.camera)
-                      .then((value) {});
+                      .then((value) {
+                    MultipartRequest req = MultipartRequest(
+                      'POST',
+                      Uri.parse(
+                        'https://cofu-305406.wl.r.appspot.com/application',
+                      ),
+                    );
+                    req.headers['Cookie'] =
+                        'connect.sid=' + widget.session.session;
+
+                    req.files.add(
+                      MultipartFile(
+                        'file',
+                        File(value.path).readAsBytes().asStream(),
+                        File(value.path).lengthSync(),
+                        filename: value.path.split("/").last,
+                      ),
+                    );
+                  });
                 })
               ],
             ),
