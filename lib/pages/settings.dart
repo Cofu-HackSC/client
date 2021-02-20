@@ -1,7 +1,7 @@
 import 'package:app/components/button.dart';
 import 'package:app/components/header.dart';
 import 'package:app/components/themed_text.dart';
-import 'package:app/pages/login.dart';
+import 'package:app/pages/login/login.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
