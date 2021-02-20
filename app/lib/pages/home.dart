@@ -1,5 +1,6 @@
 import 'package:app/components/button.dart';
 import 'package:app/components/header.dart';
+import 'package:app/models/cook_profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:app/pages/settings.dart';
 import 'package:flutter/material.dart';
