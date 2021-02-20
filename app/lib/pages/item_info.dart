@@ -40,6 +40,25 @@ class ItemInfoPage extends StatelessWidget {
                     // type: Type.subtitle,
                     ),
                 Divider(),
+                Row(
+                  children: [
+                    ClipOval(
+                      child: Image.asset(
+                        'assets/example_profile.jpg',
+                        height: 70,
+                      ),
+                    ),
+                    SizedBox(width: 16),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ThemedText('Jason Telanoff'),
+                        ThemedText('jason.telanoff@gmail.com'),
+                      ],
+                    ),
+                  ],
+                ),
+                Divider(),
                 ThemedText(
                   item.description,
                   type: Type.subtitle,
