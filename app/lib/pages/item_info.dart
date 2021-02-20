@@ -1,3 +1,4 @@
+import 'package:app/components/button.dart';
 import 'package:app/components/header.dart';
 import 'package:app/components/themed_text.dart';
 import 'package:app/global/app_theme.dart';
@@ -17,10 +18,11 @@ class ItemInfoPage extends StatelessWidget {
       borderRadius: BorderRadius.only(
           topLeft: Radius.circular(16), topRight: Radius.circular(16)),
       color: AppTheme.backgroundLighGray,
-      minHeight: 420,
-      maxHeight: 560,
+      minHeight: 470,
+      maxHeight: 570,
       parallaxEnabled: true,
       parallaxOffset: 0.2,
+      padding: EdgeInsets.only(top: 16),
       panel: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -40,23 +42,28 @@ class ItemInfoPage extends StatelessWidget {
                     // type: Type.subtitle,
                     ),
                 Divider(),
-                Row(
-                  children: [
-                    ClipOval(
-                      child: Image.asset(
-                        'assets/example_profile.jpg',
-                        height: 70,
+                TextButton(
+                  onPressed: () {
+                    // Go to the profile
+                  },
+                  child: Row(
+                    children: [
+                      ClipOval(
+                        child: Image.asset(
+                          'assets/example_profile.jpg',
+                          height: 70,
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ThemedText('Jason Telanoff'),
-                        ThemedText('jason.telanoff@gmail.com'),
-                      ],
-                    ),
-                  ],
+                      SizedBox(width: 16),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ThemedText('Jason Telanoff'),
+                          ThemedText('jason.telanoff@gmail.com'),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 Divider(),
                 ThemedText(
@@ -68,12 +75,33 @@ class ItemInfoPage extends StatelessWidget {
                   item.ingredients,
                   type: Type.subtitle,
                 ),
+                Divider(),
+                SizedBox(height: 32),
+                SizedBox(
+                  width: double.infinity,
+                  child: Button(
+                    'Reserve Pickup',
+                    onPressed: () {
+                      // Order Pickup
+                    },
+                  ),
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: Button(
+                    'Order for Delivery',
+                    onPressed: () {
+                      // Order Delivery
+                    },
+                  ),
+                ),
               ],
             ),
           )
         ],
       ),
       body: CustomScrollView(
+        physics: NeverScrollableScrollPhysics(),
         slivers: [
           SliverAppBar(
             pinned: true,
