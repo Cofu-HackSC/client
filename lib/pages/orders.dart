@@ -1,42 +1,59 @@
 import 'package:app/components/feed_tile.dart';
 import 'package:app/components/header.dart';
+import 'package:app/components/orders_tile.dart';
 import 'package:app/models/cook_profile.dart';
 import 'package:app/models/item.dart';
+import 'package:app/models/sale.dart';
+import 'package:app/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class OrderPage extends StatefulWidget {
+class OrdersPage extends StatefulWidget {
   @override
-  _OrderPageState createState() => _OrderPageState();
+  _OrdersPageState createState() => _OrdersPageState();
 }
 
-class _OrderPageState extends State<OrderPage> {
-  List<Item> items;
+class _OrdersPageState extends State<OrdersPage> {
+  List<Sale> orders;
 
   @override
   void initState() {
     super.initState();
-    items = [
-      new Item(
-        itemID: 'sdgsdgsdgesr',
-        sellerID: 'sdgsdg',
-        photoURL: 'sdg',
-        name: 'Jason\'s Pretzels',
-        avgItemRating: 4.6,
-        delivery: true,
-        pickup: true,
-        ingredients: 'Flour, Milk, Yeast, Olive Oil, Sugar, Salt, Baking Soda',
-        description: 'A yummy yummy for your tummy treat made by yours truely.',
-        cost: 1.60,
-        stock: 16,
-        cook: CookProfile(
-          name: 'Jason Telanoff',
-          bio: 'Likes Eating... A lot',
-          address: '1234 ThisIsThe Way, Some City',
-          emailContact: true,
-          contact: 'jason.telanoff@gmail.com',
-          id: 'asdfje',
+    orders = [
+      new Sale(
+        item: new Item(
+          itemID: 'sdgsdgsdgesr',
+          sellerID: 'sdgsdg',
+          photoURL: 'sdg',
+          name: 'Jason\'s Pretzels',
+          avgItemRating: 4.6,
+          delivery: true,
+          pickup: true,
+          ingredients:
+              'Flour, Milk, Yeast, Olive Oil, Sugar, Salt, Baking Soda',
+          description:
+              'A yummy yummy for your tummy treat made by yours truely.',
+          cost: 1.60,
+          stock: 16,
+          cook: CookProfile(
+            name: 'Jason Telanoff',
+            bio: 'Likes Eating... A lot',
+            address: '1234 ThisIsThe Way, Some City',
+            emailContact: true,
+            contact: 'jason.telanoff@gmail.com',
+            id: 'asdfje',
+          ),
         ),
+        amount: 3,
+        buyer: new User(),
+        buyerID: 'aje;fj ',
+        fulfilled: false,
+        hide: false,
+        pickup: true,
+        rating: null,
+        ratingText: '',
+        saleID: 'erjere',
+        totalCost: 4.80,
       ),
     ];
   }
@@ -54,10 +71,12 @@ class _OrderPageState extends State<OrderPage> {
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
-            (c, i) => FeedTile(
-              item: items[i],
-            ),
-            childCount: items.length,
+            (c, i) => orders[i].hide
+                ? Container()
+                : OrderTile(
+                    sale: orders[i],
+                  ),
+            childCount: orders.length,
           ),
         )
       ],
