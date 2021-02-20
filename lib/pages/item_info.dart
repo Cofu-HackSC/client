@@ -1,7 +1,6 @@
 import 'package:app/components/button.dart';
 import 'package:app/components/themed_text.dart';
 import 'package:app/global/app_theme.dart';
-import 'package:app/models/cook_profile.dart';
 import 'package:app/models/item.dart';
 import 'package:app/pages/order.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +8,7 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class ItemInfoPage extends StatelessWidget {
   final Item item;
-  final CookProfile cook;
-  ItemInfoPage({@required this.item, @required this.cook});
+  ItemInfoPage({@required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +57,7 @@ class ItemInfoPage extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ThemedText(cook.name),
+                          ThemedText(item.cook.name),
                           ThemedText('View more from this chef >',
                               type: Type.subtitle),
                         ],
