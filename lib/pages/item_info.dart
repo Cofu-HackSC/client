@@ -85,17 +85,26 @@ class ItemInfoPage extends StatelessWidget {
                   width: double.infinity,
                   child: Button(
                     'Reserve Pickup',
-                    onPressed: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (c) => OrderPage(item))),
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (c) => OrderPage(
+                                  item,
+                                  pickup: true,
+                                ))),
                   ),
                 ),
                 SizedBox(
                   width: double.infinity,
                   child: Button(
                     'Order for Delivery',
-                    onPressed: () {
-                      // Order Delivery
-                    },
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (c) => OrderPage(
+                                  item,
+                                  pickup: false,
+                                ))),
                   ),
                 ),
               ],

@@ -31,28 +31,38 @@ class _OrderPageState extends State<OrderPage> {
         ),
         SliverList(
             delegate: SliverChildListDelegate([
+          SizedBox(
+            height: 32,
+          ),
           ThemedText(
             widget.item.name,
             type: Type.h1,
           ),
           Divider(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ThemedText('Order Quantity'),
-              Row(children: [
-                IconButton(
-                  icon: Icon(Icons.chevron_left),
-                  onPressed: () => setState(() => quantity--),
-                ),
-                ThemedText(quantity.toString()),
-                IconButton(
-                  icon: Icon(Icons.chevron_right),
-                  onPressed: () => setState(() => quantity--),
-                ),
-              ]),
-            ],
-          )
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ThemedText('Order Quantity'),
+                Row(children: [
+                  IconButton(
+                    icon: Icon(Icons.arrow_drop_down),
+                    onPressed: () => setState(() {
+                      if (quantity > 1) quantity--;
+                    }),
+                  ),
+                  ThemedText(quantity.toString()),
+                  IconButton(
+                    icon: Icon(Icons.arrow_drop_up),
+                    onPressed: () => setState(() {
+                      if (quantity < widget.item.stock) quantity++;
+                    }),
+                  ),
+                ]),
+              ],
+            ),
+          ),
         ]))
       ],
     ));
