@@ -1,5 +1,6 @@
 import 'package:app/components/button.dart';
 import 'package:app/components/header.dart';
+import 'package:app/pages/settings.dart';
 import 'package:flutter/material.dart';
 
 import 'feed.dart';
@@ -25,10 +26,7 @@ class _HomePageState extends State<HomePage> {
       'Index 1: Business',
       style: optionStyle,
     ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    SettingsPage(),
   ];
 
   void _onItemTapped(int index) {
