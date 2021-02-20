@@ -94,6 +94,7 @@ class ItemInfoPage extends StatelessWidget {
                                 ))),
                   ),
                 ),
+                SizedBox(height: 12),
                 SizedBox(
                   width: double.infinity,
                   child: Button(
