@@ -1,3 +1,5 @@
+import 'package:app/components/button.dart';
+import 'package:app/components/header.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -6,13 +8,11 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            title: Text('hi'),
-          ),
+          Header('Login'),
           SliverFillRemaining(
             child: Center(
-              child: TextButton(
-                child: Text('Login'),
+              child: Button(
+                'Login',
                 onPressed: () => Navigator.pushNamed(context, '/home'),
               ),
             ),
