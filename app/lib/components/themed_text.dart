@@ -43,7 +43,7 @@ TextStyle themedTextStyle(Type type) {
     case Type.h2:
       return TextStyle(
         color: AppTheme.primaryText,
-        fontSize: 22,
+        fontSize: 20,
         fontWeight: FontWeight.w500,
       );
     case Type.body:
