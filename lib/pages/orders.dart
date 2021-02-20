@@ -62,7 +62,7 @@ class _OrdersPageState extends State<OrdersPage> {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        Header('Feed'),
+        Header('Orders'),
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),

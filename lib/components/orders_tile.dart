@@ -104,7 +104,7 @@ class OrderTile extends StatelessWidget {
                     mini: true,
                     child: Icon(Icons.check),
                     onPressed: () {},
-                    backgroundColor: Colors.green[600],
+                    backgroundColor: AppTheme.logoGreen,
                   ),
                 )
             ],
