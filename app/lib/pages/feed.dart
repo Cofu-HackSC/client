@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 class FeedPage extends StatelessWidget {
   final List<Item> items = [
     new Item(
-      name: 'Pretzels',
+      name: 'Jason\'s Pretzels',
       avgItemRating: 4.6,
       delivery: true,
       pickup: true,

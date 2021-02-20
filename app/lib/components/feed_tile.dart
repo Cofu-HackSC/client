@@ -51,7 +51,7 @@ class FeedTile extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ThemedText(
-                              cook.name.split(' ')[0] + '\'s ' + item.name,
+                              item.name,
                               type: Type.h2,
                             ),
                             ThemedText(
