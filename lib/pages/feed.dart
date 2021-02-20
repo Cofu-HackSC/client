@@ -32,9 +32,10 @@ class _FeedPageState extends State<FeedPage> {
         cook: CookProfile(
           name: 'Jason Telanoff',
           bio: 'Likes Eating... A lot',
-          address: '1234 ThisIsThe Way',
+          address: '1234 ThisIsThe Way, Some City',
           emailContact: true,
           contact: 'jason.telanoff@gmail.com',
+          id: 'asdfje',
         ),
       ),
     ];
