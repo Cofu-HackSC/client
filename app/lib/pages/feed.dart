@@ -1,5 +1,6 @@
 import 'package:app/components/feed_tile.dart';
 import 'package:app/components/header.dart';
+import 'package:app/models/cook_profile.dart';
 import 'package:app/models/item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,14 @@ class FeedPage extends StatelessWidget {
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
-            (c, i) => FeedTile(items[i]),
+            (c, i) => FeedTile(
+                item: items[i],
+                cook: new CookProfile(
+                    name: 'Jason Telanoff',
+                    bio: 'Likes Eating... A lot',
+                    address: '1234 ThisIsThe Way',
+                    emailContact: true,
+                    contact: 'jason.telanoff@gmail.com')),
             childCount: items.length,
           ),
         )

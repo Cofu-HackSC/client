@@ -1,6 +1,6 @@
 class User {
   String id, name, bio, photoURL, address, provider, providerID, location;
-  bool isCook, emailContact;
+  bool emailContact;
   String contact;
 
   User({
@@ -10,7 +10,6 @@ class User {
     this.photoURL,
     this.address,
     this.location,
-    this.isCook,
     this.emailContact,
     this.contact,
   });

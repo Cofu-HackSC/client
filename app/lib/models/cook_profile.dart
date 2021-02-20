@@ -14,7 +14,6 @@ class CookProfile extends User {
     @required String photoURL,
     @required String address,
     @required String location,
-    @required bool isCook,
     @required bool emailContact,
     @required String contact,
   }) : super(
@@ -24,7 +23,6 @@ class CookProfile extends User {
           photoURL: photoURL,
           address: address,
           location: location,
-          isCook: isCook,
           emailContact: emailContact,
           contact: contact,
         );

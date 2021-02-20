@@ -2,13 +2,15 @@ import 'package:app/components/button.dart';
 import 'package:app/components/header.dart';
 import 'package:app/components/themed_text.dart';
 import 'package:app/global/app_theme.dart';
+import 'package:app/models/cook_profile.dart';
 import 'package:app/models/item.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class ItemInfoPage extends StatelessWidget {
   final Item item;
-  ItemInfoPage(this.item);
+  final CookProfile cook;
+  ItemInfoPage({@required this.item, @required this.cook});
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +34,14 @@ class ItemInfoPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ThemedText(
-                  item.name,
+                  cook.name.split(' ')[0] + '\'s ' + item.name,
                   type: Type.h1,
                 ),
                 Stars(item.avgItemRating),
                 Divider(),
+                ThemedText('\$' + item.cost.toStringAsFixed(2)),
                 ThemedText(
-                    '${item.delivery ? item.pickup ? 'Delivery and Pickup' : 'Delivery' : item.pickup ? 'Pickup' : 'Error'}'
-                    // type: Type.subtitle,
-                    ),
+                    '${item.delivery ? item.pickup ? 'Delivery and Pickup' : 'Delivery' : item.pickup ? 'Pickup' : 'Error'}'),
                 Divider(),
                 TextButton(
                   onPressed: () {
@@ -58,8 +59,9 @@ class ItemInfoPage extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ThemedText('Jason Telanoff'),
-                          ThemedText('jason.telanoff@gmail.com'),
+                          ThemedText(cook.name),
+                          ThemedText('View more from this chef >',
+                              type: Type.subtitle),
                         ],
                       ),
                     ],
@@ -100,13 +102,14 @@ class ItemInfoPage extends StatelessWidget {
           )
         ],
       ),
-      body: CustomScrollView(
-        physics: NeverScrollableScrollPhysics(),
-        slivers: [
-          SliverAppBar(
-            pinned: true,
-            collapsedHeight: 64,
-            expandedHeight: 72,
+      body: Stack(
+        children: [
+          Image.asset(
+            'assets/example_img.jpg',
+            fit: BoxFit.cover,
+            height: double.infinity,
+          ),
+          AppBar(
             automaticallyImplyLeading: false,
             leading: IconButton(
               icon: Icon(
@@ -118,19 +121,7 @@ class ItemInfoPage extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
-            title: ThemedText(
-              'Item Info',
-              type: Type.h1,
-              color: AppTheme.primaryText,
-            ),
             backgroundColor: Color(0x00),
-          ),
-          SliverFillRemaining(
-            child: Image.asset(
-              'assets/example_img.jpg',
-              fit: BoxFit.cover,
-              height: double.infinity,
-            ),
           ),
         ],
       ),

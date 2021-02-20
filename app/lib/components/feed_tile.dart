@@ -1,12 +1,14 @@
 import 'package:app/components/themed_text.dart';
 import 'package:app/global/app_theme.dart';
+import 'package:app/models/cook_profile.dart';
 import 'package:app/models/item.dart';
 import 'package:app/pages/item_info.dart';
 import 'package:flutter/material.dart';
 
 class FeedTile extends StatelessWidget {
   final Item item;
-  FeedTile(this.item);
+  final CookProfile cook;
+  FeedTile({@required this.item, @required this.cook});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,12 @@ class FeedTile extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: TextButton(
         onPressed: () => Navigator.push(
-            context, MaterialPageRoute(builder: (c) => ItemInfoPage(item))),
+            context,
+            MaterialPageRoute(
+                builder: (c) => ItemInfoPage(
+                      item: item,
+                      cook: cook,
+                    ))),
         style: TextButton.styleFrom(
             backgroundColor: AppTheme.backgroundLighGray,
             shape: RoundedRectangleBorder(
@@ -44,7 +51,7 @@ class FeedTile extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ThemedText(
-                              item.name,
+                              cook.name.split(' ')[0] + '\'s ' + item.name,
                               type: Type.h2,
                             ),
                             ThemedText(
