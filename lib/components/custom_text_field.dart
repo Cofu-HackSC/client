@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;
-  CustomTextField({@required this.controller, @required this.labelText});
+  final Widget trailing;
+  CustomTextField({
+    @required this.controller,
+    @required this.labelText,
+    this.trailing,
+  });
 
   @override
   Widget build(BuildContext context) {
