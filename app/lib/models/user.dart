@@ -1,7 +1,7 @@
 import 'dart:html';
 
 class User {
-  String id, name, bio, photoURL, address, provider, providerID;
+  String id, name, bio, photoURL, address;
   Geolocation location;
   bool isCook, emailContact;
   String contact;
@@ -12,8 +12,6 @@ class User {
     this.bio,
     this.photoURL,
     this.address,
-    this.provider,
-    this.providerID,
     this.location,
     this.isCook,
     this.emailContact,
