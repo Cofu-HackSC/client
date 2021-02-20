@@ -37,27 +37,41 @@ class FeedTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ThemedText(
-                      item.name,
-                      type: Type.h2,
-                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ThemedText(
-                          '${item.delivery ? item.pickup ? 'Delivery and Pickup' : 'Delivery' : item.pickup ? 'Pickup' : 'Error'}',
-                          type: Type.subtitle,
-                        ),
-                        Row(
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ThemedText(
-                              item.avgItemRating.toString(),
+                              item.name,
+                              type: Type.h2,
+                            ),
+                            ThemedText(
+                              '${item.delivery ? item.pickup ? 'Delivery and Pickup' : 'Delivery' : item.pickup ? 'Pickup' : 'Error'}',
                               type: Type.subtitle,
                             ),
-                            Icon(
-                              Icons.star_rounded,
-                              size: 16,
-                              color: AppTheme.star,
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            ThemedText(
+                              '\$' + item.cost.toStringAsFixed(2),
+                              // type: Type.subtitle,
+                            ),
+                            Row(
+                              children: [
+                                ThemedText(
+                                  item.avgItemRating.toString(),
+                                  type: Type.subtitle,
+                                ),
+                                Icon(
+                                  Icons.star_rounded,
+                                  size: 16,
+                                  color: AppTheme.star,
+                                ),
+                              ],
                             ),
                           ],
                         ),

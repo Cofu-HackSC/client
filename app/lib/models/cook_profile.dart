@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:app/models/user.dart';
 import 'package:flutter/foundation.dart';
 
