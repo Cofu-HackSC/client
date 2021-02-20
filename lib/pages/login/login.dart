@@ -24,9 +24,7 @@ class LoginPage extends StatelessWidget {
       backdropEnabled: true,
       minHeight: 0,
       maxHeight: MediaQuery.of(context).size.height * 0.9,
-      borderRadius: BorderRadius.circular(
-        40,
-      ),
+      borderRadius: BorderRadius.circular(40),
       defaultPanelState: PanelState.CLOSED,
       panel: SignUpPage(),
       body: Scaffold(

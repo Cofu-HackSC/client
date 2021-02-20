@@ -12,6 +12,9 @@ class CustomTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
+          fillColor: Colors.red,
+          focusColor: Colors.green,
+          hoverColor: Colors.red,
           labelText: labelText,
           labelStyle: TextStyle(color: Colors.black),
         ),

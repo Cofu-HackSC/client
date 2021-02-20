@@ -1,3 +1,4 @@
+import 'package:app/global/app_theme.dart';
 import 'package:app/pages/home.dart';
 import 'package:app/pages/item_info.dart';
 import 'package:app/pages/login/login.dart';
@@ -13,9 +14,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: AppTheme.primary,
       ),
-      initialRoute: '/home',
+      initialRoute: '/login',
       routes: {
         '/home': (context) => HomePage(),
         '/login': (context) => LoginPage(),
