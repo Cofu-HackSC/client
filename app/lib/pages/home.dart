@@ -12,30 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static List<Widget> _pages = <Widget>[
-    FeedPage(),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    SettingsPage(),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,35 +23,23 @@ class _HomePageState extends State<HomePage> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.business),
-              label: 'Business',
+              icon: Icon(Icons.shopping_bag),
+              label: 'Orders',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.school),
-              label: 'School',
+              icon: Icon(Icons.settings),
+              label: 'Settings',
             ),
           ],
         ),
         tabBuilder: (c, i) {
           switch (i) {
             case 0:
-              return CustomScrollView(
-                slivers: [
-                  Header('Home Page'),
-                  SliverFillRemaining(
-                    child: Center(
-                      child: Button(
-                        'Log Out',
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                    ),
-                  ),
-                ],
-              );
+              return FeedPage();
             case 1:
               return Container();
             default:
-              return Container();
+              return SettingsPage();
           }
         },
       ),
