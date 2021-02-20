@@ -11,11 +11,21 @@ class SettingsPage extends StatelessWidget {
           delegate: SliverChildListDelegate(
             [
               ListTile(
-                  title: Text('Sign Out'),
-                  subtitle: Text(
-                    'We\'ll miss you🥺',
-                  ),
-                  onTap: () => Navigator.of(context).pushNamed('/login')),
+                title: Text('Sign Out'),
+                subtitle: Text(
+                  'We\'ll miss you🥺',
+                ),
+                onTap: () => Navigator.of(context).pushNamed('/login'),
+              ),
+              ListTile(
+                title: Text('Want to sell on Cofu'),
+                subtitle: Text(
+                  'Apply Here ➡️',
+                ),
+                onTap: () => Navigator.of(context).pushNamed(
+                  '/application',
+                ),
+              ),
             ],
           ),
         ),
