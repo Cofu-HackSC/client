@@ -43,6 +43,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
   @override
   void initState() {
     controller = new PanelController();
+    stock = 1;
 
     openPanel();
     super.initState();
@@ -120,7 +121,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                   ),
                 ),
                 SpacedRow(
-                  ThemedText('Order Quantity'),
+                  ThemedText('Stock'),
                   Row(children: [
                     IconButton(
                       icon: Icon(Icons.arrow_drop_down),
@@ -172,7 +173,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                         children: [
                           ThemedText(widget.profile.name),
                           ThemedText(
-                            'View your profile ➡️',
+                            'View your profile >',
                             type: Type.subtitle,
                           ),
                         ],
@@ -215,7 +216,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                           'cost': costController.text,
                           'description': descriptionController.text,
                           'ingredients': ingredientsController.text,
-                          'stock': stockController.text,
+                          'stock': stock.toString(),
                         });
 
                         req.files.add(
