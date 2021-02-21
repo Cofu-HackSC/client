@@ -59,21 +59,23 @@ class _PostFoodPageState extends State<PostFoodPage> {
       controller: controller,
       margin: EdgeInsets.symmetric(horizontal: 8),
       borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(16), topRight: Radius.circular(16)),
+        topLeft: Radius.circular(16),
+        topRight: Radius.circular(16),
+      ),
       color: AppTheme.backgroundLighGray,
       minHeight: 0,
       maxHeight: 570,
       parallaxEnabled: true,
       parallaxOffset: 0.02,
       panel: Padding(
-        padding: EdgeInsets.only(bottom: 60),
+        padding: EdgeInsets.only(bottom: 0),
         child: SizedBox(
           height: 560,
           child: ClipRRect(
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16), topRight: Radius.circular(16)),
             child: ListView(
-              // padding: EdgeInsets.only(top: 32, bottom: 80),
+              padding: EdgeInsets.only(top: 10, bottom: 80),
               children: [
                 CustomTextField(
                   labelText: 'Name',
@@ -84,7 +86,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ThemedText('Pickup'),
-                      Switch(
+                      Switch.adaptive(
                         activeColor: AppTheme.logoGreen,
                         onChanged: (bool value) =>
                             setState(() => item.pickup = value),
@@ -99,7 +101,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ThemedText('Delivery'),
-                      Switch(
+                      Switch.adaptive(
                         activeColor: AppTheme.logoGreen,
                         onChanged: (bool value) =>
                             setState(() => item.delivery = value),
@@ -153,16 +155,19 @@ class _PostFoodPageState extends State<PostFoodPage> {
                 ),
                 Divider(),
                 SizedBox(height: 32),
-                SizedBox(
-                  width: double.infinity,
-                  child: Button(
-                    'Post',
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (c) => OrderPage(
-                          item,
-                          pickup: false,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Button(
+                      'Post',
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (c) => OrderPage(
+                            item,
+                            pickup: false,
+                          ),
                         ),
                       ),
                     ),
