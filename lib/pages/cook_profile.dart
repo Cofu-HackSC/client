@@ -1,6 +1,8 @@
 import 'package:app/global/app_theme.dart';
+import 'package:app/models/session.dart';
 import 'package:app/pages/post_food.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../components/feed_tile.dart';
 import '../components/header.dart';
@@ -10,8 +12,13 @@ import '../models/item.dart';
 
 class CookProfilePage extends StatelessWidget {
   final CookProfile cook;
+  final bool isMe;
   final bool showBack;
-  CookProfilePage(this.cook, {this.showBack = true});
+  CookProfilePage(
+    this.cook, {
+    this.showBack = true,
+    this.isMe = false,
+  });
 
   final List<Item> items = [
     new Item(
@@ -40,14 +47,21 @@ class CookProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: cook.id == me.id
+        floatingActionButton: isMe
             ? Padding(
                 padding: const EdgeInsets.only(bottom: 48),
                 child: FloatingActionButton(
                   backgroundColor: AppTheme.logoGreen,
                   elevation: 0,
-                  onPressed: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (c) => PostFoodPage())),
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (c) => PostFoodPage(
+                        session: Provider.of<Session>(c),
+                        profile: cook,
+                      ),
+                    ),
+                  ),
                   child: Icon(Icons.add),
                 ),
               )

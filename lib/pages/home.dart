@@ -1,3 +1,4 @@
+import 'package:app/models/cook_profile.dart';
 import 'package:app/models/session.dart';
 import 'package:app/global/app_theme.dart';
 import 'package:app/pages/cook_profile.dart';
@@ -36,7 +37,7 @@ class _HomePageState extends State<HomePage> {
               label: 'Orders',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.account_box),
+              icon: Icon(Icons.account_circle),
               label: 'Profile',
             ),
             BottomNavigationBarItem(
@@ -52,7 +53,29 @@ class _HomePageState extends State<HomePage> {
             case 1:
               return OrdersPage();
             case 2:
-              return CookProfilePage(me, showBack: false);
+              return FutureBuilder<CookProfile>(
+                builder: (c, s) {
+                  if (s.connectionState != ConnectionState.done ||
+                      !s.hasData ||
+                      s.data == null) {
+                    return Container();
+                  } else {
+                    print(s.data);
+                    return CookProfilePage(s.data);
+                  }
+                },
+                future: CookProfile.load(widget.session),
+              );
+              return CookProfilePage(
+                CookProfile(
+                  name: 'ben swerd',
+                  id: 'asfasfasf',
+                  bio: 'I make too many pretzels',
+                  address: '1327 August Drive',
+                  location: 'cool land',
+                ),
+                showBack: false,
+              );
             default:
               return SettingsPage();
           }
