@@ -207,7 +207,12 @@ class _PostFoodPageState extends State<PostFoodPage> {
                 color: AppTheme.primary,
               )),
             ),
-            if (image?.existsSync() ?? false) Image.file(image),
+            if (image?.existsSync() ?? false)
+              Image.file(
+                image,
+                height: double.infinity,
+                fit: BoxFit.fill,
+              ),
             AppBar(
               automaticallyImplyLeading: false,
               leading: IconButton(
