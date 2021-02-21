@@ -75,11 +75,6 @@ class _ApplicationState extends State<Application> {
                         print('RESPONSE');
                         print(res.statusCode);
                         print(res.reasonPhrase);
-                        res.stream.listen((value) {
-                          print(
-                              'STREAMING: ' + DateTime.now().toIso8601String());
-                          print(value);
-                        });
 
                         await res.stream
                             .drain()
