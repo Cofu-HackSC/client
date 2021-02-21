@@ -229,6 +229,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                             );
 
                             req.send();
+                            Navigator.pop(context);
 
                             showCupertinoDialog(
                               context: context,
@@ -238,15 +239,16 @@ class _PostFoodPageState extends State<PostFoodPage> {
                                 ),
                                 content: Text(
                                     'It will be visible in a few minutes.'),
+                                actions: [
+                                  TextButton(
+                                    child: ThemedText('Ok'),
+                                    onPressed: () {
+                                      Navigator.pop(c);
+                                    },
+                                  )
+                                ],
                               ),
-                            ).then((c) {
-                              Navigator.pop(
-                                c,
-                              );
-                              Navigator.pop(
-                                context,
-                              );
-                            });
+                            );
                           },
                         ),
                       ),
