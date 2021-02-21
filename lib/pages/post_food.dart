@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app/components/button.dart';
 import 'package:app/components/custom_text_field.dart';
 import 'package:app/components/themed_text.dart';
@@ -5,6 +7,7 @@ import 'package:app/global/app_theme.dart';
 import 'package:app/models/item.dart';
 import 'package:app/pages/feed/order.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import '../models/cook_profile.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -29,6 +32,8 @@ class PostFoodPage extends StatefulWidget {
 class _PostFoodPageState extends State<PostFoodPage> {
   PanelController controller;
   Item item;
+
+  File image;
 
   @override
   void initState() {
@@ -106,7 +111,9 @@ class _PostFoodPageState extends State<PostFoodPage> {
                 Divider(),
                 CustomTextField(
                   labelText: 'Cost',
-                  trailing: Icon(Icons.attach_money),
+                  trailing: Icon(
+                    Icons.attach_money,
+                  ),
                 ),
                 // Delivery and pickup
                 Divider(),
@@ -151,12 +158,14 @@ class _PostFoodPageState extends State<PostFoodPage> {
                   child: Button(
                     'Post',
                     onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (c) => OrderPage(
-                                  item,
-                                  pickup: false,
-                                ))),
+                      context,
+                      MaterialPageRoute(
+                        builder: (c) => OrderPage(
+                          item,
+                          pickup: false,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -166,8 +175,15 @@ class _PostFoodPageState extends State<PostFoodPage> {
       ),
       body: TextButton(
         onPressed: () {
+          print('image');
+          ImagePicker().getImage(source: ImageSource.camera).then((value) {
+            image = File(value.path);
+          });
           // Add image
         },
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.zero,
+        ),
         child: Stack(
           children: [
             Image.asset(
@@ -184,6 +200,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                 color: AppTheme.primary,
               )),
             ),
+            if (image?.existsSync() ?? false) Image.file(image),
             AppBar(
               automaticallyImplyLeading: false,
               leading: IconButton(
@@ -203,51 +220,4 @@ class _PostFoodPageState extends State<PostFoodPage> {
       ),
     ));
   }
-}
-
-class Stars extends StatelessWidget {
-  final double stars;
-  Stars(this.stars);
-
-  @override
-  Widget build(BuildContext context) {
-    List<Widget> widgets;
-
-    widgets = List.generate(
-      stars.ceil(),
-      (i) => i < stars.floor()
-          ? Icon(
-              Icons.star_rounded,
-              color: AppTheme.star,
-            )
-          : ClipPath(
-              clipper: BoxClipper(stars % 1),
-              clipBehavior: Clip.hardEdge,
-              child: Icon(
-                Icons.star_rounded,
-                color: AppTheme.star,
-              )),
-    );
-
-    widgets.insert(0, ThemedText(stars.toString() + ' '));
-
-    return Row(children: widgets);
-  }
-}
-
-class BoxClipper extends CustomClipper<Path> {
-  final double clipRatio;
-  BoxClipper(this.clipRatio);
-
-  Path getClip(Size size) {
-    var path = Path();
-    path.lineTo(0.0, size.height);
-    path.lineTo(size.width * clipRatio, size.height);
-    path.lineTo(size.width * clipRatio, 0.0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
