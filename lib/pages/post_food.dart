@@ -202,15 +202,17 @@ class _PostFoodPageState extends State<PostFoodPage> {
                         child: Button(
                           'Post',
                           onPressed: () async {
+                            print(1);
                             MultipartRequest req = MultipartRequest(
                               'POST',
                               Uri.parse(
                                 'https://cofu-305406.wl.r.appspot.com/item',
                               ),
                             );
+                            print(2);
                             req.headers['Cookie'] =
                                 'connect.sid=' + widget.session.session;
-
+                            print(3);
                             req.fields.addAll({
                               'name': nameController.text,
                               'pickup': pickup.toString(),
@@ -220,17 +222,17 @@ class _PostFoodPageState extends State<PostFoodPage> {
                               'ingredients': ingredientsController.text,
                               'stock': stock.toString(),
                             });
-
+                            print(4);
                             req.files.add(
                               await MultipartFile.fromPath(
                                 'file',
                                 image.path,
                               ),
                             );
-
-                            req.send();
-                            Navigator.pop(context);
-
+                            print(5);
+                            req.send().then((value) => print(7));
+                            // Navigator.pop(context);
+                            print(6);
                             showCupertinoDialog(
                               context: context,
                               builder: (c) => CupertinoAlertDialog(
