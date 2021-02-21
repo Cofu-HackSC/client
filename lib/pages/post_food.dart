@@ -228,8 +228,10 @@ class _PostFoodPageState extends State<PostFoodPage> {
                               ),
                             );
 
-                            req.send();
+                            print('waiting');
+                            req.send().then((value) => print(value.statusCode));
 
+                            // Navigator.pop(context);
                             showCupertinoDialog(
                               context: context,
                               builder: (c) => CupertinoAlertDialog(

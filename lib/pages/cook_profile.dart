@@ -24,7 +24,7 @@ class CookProfilePage extends StatelessWidget {
     new Item(
       itemID: 'sdgsdgsdgesr',
       sellerID: 'sdgsdg',
-      photoURL: 'sdg',
+      photoURL: 'example_img.jpg',
       name: 'Jason\'s Pretzels',
       avgItemRating: 4.6,
       delivery: true,
