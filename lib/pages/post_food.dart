@@ -43,6 +43,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
   @override
   void initState() {
     controller = new PanelController();
+    stock = 1;
 
     openPanel();
     super.initState();
@@ -77,7 +78,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16), topRight: Radius.circular(16)),
             child: ListView(
-              padding: EdgeInsets.only(top: 10, bottom: 80),
+              padding: EdgeInsets.only(top: 22, bottom: 500),
               children: [
                 CustomTextField(
                   labelText: 'Name',
@@ -120,7 +121,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                   ),
                 ),
                 SpacedRow(
-                  ThemedText('Order Quantity'),
+                  ThemedText('Stock'),
                   Row(children: [
                     IconButton(
                       icon: Icon(Icons.arrow_drop_down),
@@ -172,7 +173,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                         children: [
                           ThemedText(widget.profile.name),
                           ThemedText(
-                            'View your profile ➡️',
+                            'View your profile >',
                             type: Type.subtitle,
                           ),
                         ],
@@ -235,15 +236,16 @@ class _PostFoodPageState extends State<PostFoodPage> {
                             ),
                             content:
                                 Text('It will be visible in a few minutes.'),
+                            actions: [
+                              TextButton(
+                                child: ThemedText('Ok'),
+                                onPressed: () {
+                                  Navigator.pop(c);
+                                },
+                              )
+                            ],
                           ),
-                        ).then((c) {
-                          Navigator.pop(
-                            c,
-                          );
-                          Navigator.pop(
-                            context,
-                          );
-                        });
+                        );
                       },
                     ),
                   ),
@@ -258,7 +260,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
           print('image');
           ImagePicker().getImage(source: ImageSource.camera).then((value) {
             setState(() {
-              image = File(value?.path);
+              image = File(value.path);
             });
           });
           // Add image
