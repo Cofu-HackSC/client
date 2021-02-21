@@ -30,8 +30,6 @@ class _FeedPageState extends State<FeedPage> {
         cost: 1.60,
         stock: 16,
         cook: CookProfile(
-          location: 'Los Angeles',
-          photoURL: '',
           name: 'Jason Telanoff',
           bio: 'Likes Eating... A lot',
           address: '1234 ThisIsThe Way, Some City',
