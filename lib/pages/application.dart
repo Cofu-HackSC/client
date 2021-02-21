@@ -43,43 +43,55 @@ class _ApplicationState extends State<Application> {
                   padding: const EdgeInsets.all(12.0),
                   child: Button('Click here to upload your license',
                       onPressed: () {
-                    ImagePicker()
-                        .getImage(source: ImageSource.camera)
-                        .then((value) async {
-                      MultipartRequest req = MultipartRequest(
-                        'POST',
-                        Uri.parse(
-                          'https://cofu-305406.wl.r.appspot.com/application',
-                        ),
-                      );
-                      req.headers['Cookie'] =
-                          'connect.sid=' + widget.session.session;
+                    try {
+                      print('Started Picture');
+                      ImagePicker()
+                          .getImage(source: ImageSource.camera)
+                          .then((value) async {
+                        print('Finished Picture');
 
-                      req.files.add(
-                        MultipartFile(
-                          'file',
-                          File(value.path).readAsBytes().asStream(),
-                          File(value.path).lengthSync(),
-                          filename: value.path.split("/").last,
-                        ),
-                      );
-                      var res = await req.send();
+                        MultipartRequest req = MultipartRequest(
+                          'POST',
+                          Uri.parse(
+                            'https://cofu-305406.wl.r.appspot.com/application',
+                          ),
+                        );
+                        print('here 1');
+                        req.headers['Cookie'] =
+                            'connect.sid=' + widget.session.session;
+                        print('here 2');
 
-                      print('RESPONSE');
-                      print(res.statusCode);
-                      print(res.reasonPhrase);
-                      res.stream.listen((value) {
-                        print('STREAMING: ' + DateTime.now().toIso8601String());
-                        print(value);
+                        req.files.add(
+                          MultipartFile(
+                            'file',
+                            File(value.path).readAsBytes().asStream(),
+                            File(value.path).lengthSync(),
+                            filename: value.path.split("/").last,
+                          ),
+                        );
+                        print('here 3');
+                        var res = await req.send();
+
+                        print('RESPONSE');
+                        print(res.statusCode);
+                        print(res.reasonPhrase);
+                        res.stream.listen((value) {
+                          print(
+                              'STREAMING: ' + DateTime.now().toIso8601String());
+                          print(value);
+                        });
+
+                        await res.stream
+                            .drain()
+                            .then(
+                                (value) => print("VALUEEE " + value.toString()))
+                            .then(
+                              (value) => Navigator.pop(context),
+                            );
                       });
-
-                      await res.stream
-                          .drain()
-                          .then((value) => print("VALUEEE " + value.toString()))
-                          .then(
-                            (value) => Navigator.pop(context),
-                          );
-                    });
+                    } catch (e) {
+                      print(e);
+                    }
                   }),
                 )
               ],
