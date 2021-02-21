@@ -57,7 +57,6 @@ class _HomePageState extends State<HomePage> {
                       s.data == null) {
                     return Container();
                   } else {
-                    print(s.data);
                     return CookProfilePage(
                       s.data,
                       showBack: false,

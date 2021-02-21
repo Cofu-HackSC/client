@@ -57,261 +57,256 @@ class _PostFoodPageState extends State<PostFoodPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomPadding: false,
         body: SlidingUpPanel(
-          isDraggable: false,
-          controller: controller,
-          margin: EdgeInsets.symmetric(horizontal: 8),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(16),
-            topRight: Radius.circular(16),
-          ),
-          color: AppTheme.backgroundLighGray.withOpacity(0.96),
-          minHeight: 0,
-          maxHeight: 570,
-          parallaxEnabled: true,
-          parallaxOffset: 0.02,
-          panel: Padding(
-            padding: EdgeInsets.only(bottom: 0),
-            child: SizedBox(
-              height: 560,
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(16)),
-                child: ListView(
-                  padding: EdgeInsets.only(top: 22, bottom: 500),
-                  children: [
-                    CustomTextField(
-                      labelText: 'Name',
-                      controller: nameController,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ThemedText('Pickup'),
-                          Switch.adaptive(
-                            activeColor: AppTheme.logoGreen,
-                            onChanged: (bool value) => setState(
-                              () {
-                                pickup = value;
-                              },
-                            ),
-                            value: pickup,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ThemedText('Delivery'),
-                          Switch.adaptive(
-                            activeColor: AppTheme.logoGreen,
-                            onChanged: (bool value) => setState(
-                              () {
-                                delivery = value;
-                              },
-                            ),
-                            value: delivery,
-                          ),
-                        ],
-                      ),
-                    ),
-                    SpacedRow(
-                      ThemedText('Stock'),
-                      Row(children: [
-                        IconButton(
-                          icon: Icon(Icons.arrow_drop_down),
-                          onPressed: () => setState(() {
-                            if (stock > 1) stock--;
-                          }),
-                        ),
-                        ThemedText(stock.toString()),
-                        IconButton(
-                          icon: Icon(Icons.arrow_drop_up),
-                          onPressed: () => setState(() {
-                            stock++;
-                          }),
-                        ),
-                      ]),
-                    ),
-                    Divider(),
-                    CustomTextField(
-                      labelText: 'Cost',
-                      controller: costController,
-                      trailing: Icon(
-                        Icons.attach_money,
-                      ),
-                    ),
-                    Divider(),
-                    TextButton(
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (c) => CookProfilePage(
-                            widget.profile,
-                          ),
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          Hero(
-                            tag: widget.profile.id,
-                            child: ClipOval(
-                              child: Image.asset(
-                                'assets/example_profile.jpg',
-                                height: 70,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 16),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ThemedText(widget.profile.name),
-                              ThemedText(
-                                'View your profile >',
-                                type: Type.subtitle,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Divider(),
-                    CustomTextField(
-                      labelText: 'Description',
-                      controller: descriptionController,
-                    ),
-                    Divider(),
-                    CustomTextField(
-                      labelText: 'Ingredients',
-                      controller: ingredientsController,
-                    ),
-                    Divider(),
-                    SizedBox(height: 32),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Button(
-                          'Post',
-                          onPressed: () async {
-                            print(1);
-                            MultipartRequest req = MultipartRequest(
-                              'POST',
-                              Uri.parse(
-                                'https://cofu-305406.wl.r.appspot.com/item',
-                              ),
-                            );
-                            print(2);
-                            req.headers['Cookie'] =
-                                'connect.sid=' + widget.session.session;
-                            print(3);
-                            req.fields.addAll({
-                              'name': nameController.text,
-                              'pickup': pickup.toString(),
-                              'delivery': delivery.toString(),
-                              'cost': costController.text,
-                              'description': descriptionController.text,
-                              'ingredients': ingredientsController.text,
-                              'stock': stock.toString(),
-                            });
-                            print(4);
-                            req.files.add(
-                              await MultipartFile.fromPath(
-                                'file',
-                                image.path,
-                              ),
-                            );
-                            print(5);
-                            req.send().then((value) => print(7));
-                            // Navigator.pop(context);
-                            print(6);
-                            showCupertinoDialog(
-                              context: context,
-                              builder: (c) => CupertinoAlertDialog(
-                                title: Text(
-                                  'We are processing your post',
-                                ),
-                                content: Text(
-                                    'It will be visible in a few minutes.'),
-                                actions: [
-                                  TextButton(
-                                    child: ThemedText('Ok'),
-                                    onPressed: () {
-                                      Navigator.pop(c);
-                                    },
-                                  )
-                                ],
-                              ),
-                            );
+      isDraggable: false,
+      controller: controller,
+      margin: EdgeInsets.symmetric(horizontal: 8),
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(16),
+        topRight: Radius.circular(16),
+      ),
+      color: AppTheme.backgroundLighGray.withOpacity(0.96),
+      minHeight: 0,
+      maxHeight: 570,
+      parallaxEnabled: true,
+      parallaxOffset: 0.02,
+      panel: Padding(
+        padding: EdgeInsets.only(bottom: 0),
+        child: SizedBox(
+          height: 560,
+          child: ClipRRect(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16), topRight: Radius.circular(16)),
+            child: ListView(
+              padding: EdgeInsets.only(top: 22, bottom: 500),
+              children: [
+                CustomTextField(
+                  labelText: 'Name',
+                  controller: nameController,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ThemedText('Pickup'),
+                      Switch.adaptive(
+                        activeColor: AppTheme.logoGreen,
+                        onChanged: (bool value) => setState(
+                          () {
+                            pickup = value;
                           },
                         ),
+                        value: pickup,
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ThemedText('Delivery'),
+                      Switch.adaptive(
+                        activeColor: AppTheme.logoGreen,
+                        onChanged: (bool value) => setState(
+                          () {
+                            delivery = value;
+                          },
+                        ),
+                        value: delivery,
+                      ),
+                    ],
+                  ),
+                ),
+                SpacedRow(
+                  ThemedText('Stock'),
+                  Row(children: [
+                    IconButton(
+                      icon: Icon(Icons.arrow_drop_down),
+                      onPressed: () => setState(() {
+                        if (stock > 1) stock--;
+                      }),
+                    ),
+                    ThemedText(stock.toString()),
+                    IconButton(
+                      icon: Icon(Icons.arrow_drop_up),
+                      onPressed: () => setState(() {
+                        stock++;
+                      }),
+                    ),
+                  ]),
+                ),
+                Divider(),
+                CustomTextField(
+                  labelText: 'Cost',
+                  controller: costController,
+                  trailing: Icon(
+                    Icons.attach_money,
+                  ),
+                ),
+                Divider(),
+                TextButton(
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (c) => CookProfilePage(
+                        widget.profile,
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          body: TextButton(
-            onPressed: () {
-              print('image');
-              ImagePicker().getImage(source: ImageSource.camera).then((value) {
-                setState(() {
-                  image = File(value.path);
-                });
-              });
-              // Add image
-            },
-            style: TextButton.styleFrom(
-              padding: EdgeInsets.zero,
-            ),
-            child: Stack(
-              children: [
-                Image.asset(
-                  'assets/background.png',
-                  fit: BoxFit.cover,
-                  height: double.infinity,
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height - 500,
-                  child: Center(
-                      child: Icon(
-                    Icons.camera_alt,
-                    size: 60,
-                    color: AppTheme.primary,
-                  )),
-                ),
-                if (image?.existsSync() ?? false)
-                  Image.file(
-                    image,
-                    height: double.infinity,
-                    fit: BoxFit.fill,
                   ),
-                AppBar(
-                  automaticallyImplyLeading: false,
-                  leading: IconButton(
-                    icon: Icon(
-                      Icons.chevron_left,
-                      color: AppTheme.primaryText,
-                      size: 40,
+                  child: Row(
+                    children: [
+                      Hero(
+                        tag: widget.profile.id,
+                        child: ClipOval(
+                          child: Image.asset(
+                            'assets/example_profile.jpg',
+                            height: 70,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 16),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ThemedText(widget.profile.name),
+                          ThemedText(
+                            'View your profile >',
+                            type: Type.subtitle,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Divider(),
+                CustomTextField(
+                  labelText: 'Description',
+                  controller: descriptionController,
+                ),
+                Divider(),
+                CustomTextField(
+                  labelText: 'Ingredients',
+                  controller: ingredientsController,
+                ),
+                Divider(),
+                SizedBox(height: 32),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Button(
+                      'Post',
+                      onPressed: () async {
+                        MultipartRequest req = MultipartRequest(
+                          'POST',
+                          Uri.parse(
+                            'https://cofu-305406.wl.r.appspot.com/item',
+                          ),
+                        );
+                        req.headers['Cookie'] =
+                            'connect.sid=' + widget.session.session;
+
+                        req.fields.addAll({
+                          'name': nameController.text,
+                          'pickup': pickup.toString(),
+                          'delivery': delivery.toString(),
+                          'cost': costController.text,
+                          'description': descriptionController.text,
+                          'ingredients': ingredientsController.text,
+                          'stock': stock.toString(),
+                        });
+
+                        req.files.add(
+                          await MultipartFile.fromPath(
+                            'file',
+                            image.path,
+                          ),
+                        );
+
+                        await req.send();
+
+                        showCupertinoDialog(
+                          context: context,
+                          builder: (c) => CupertinoAlertDialog(
+                            title: Text(
+                              'We are processing your post',
+                            ),
+                            content:
+                                Text('It will be visible in a few minutes.'),
+                            actions: [
+                              TextButton(
+                                child: ThemedText('Ok'),
+                                onPressed: () {
+                                  Navigator.pop(c);
+                                },
+                              )
+                            ],
+                          ),
+                        );
+                      },
                     ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
                   ),
-                  backgroundColor: Color(0x00),
                 ),
               ],
             ),
           ),
-        ));
+        ),
+      ),
+      body: TextButton(
+        onPressed: () {
+          print('image');
+          ImagePicker().getImage(source: ImageSource.camera).then((value) {
+            setState(() {
+              image = File(value.path);
+            });
+          });
+          // Add image
+        },
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.zero,
+        ),
+        child: Stack(
+          children: [
+            Image.asset(
+              'assets/background.png',
+              fit: BoxFit.cover,
+              height: double.infinity,
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height - 500,
+              child: Center(
+                  child: Icon(
+                Icons.camera_alt,
+                size: 60,
+                color: AppTheme.primary,
+              )),
+            ),
+            if (image?.existsSync() ?? false)
+              Image.file(
+                image,
+                height: double.infinity,
+                fit: BoxFit.fill,
+              ),
+            AppBar(
+              automaticallyImplyLeading: false,
+              leading: IconButton(
+                icon: Icon(
+                  Icons.chevron_left,
+                  color: AppTheme.primaryText,
+                  size: 40,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              backgroundColor: Color(0x00),
+            ),
+          ],
+        ),
+      ),
+    ));
   }
 }
