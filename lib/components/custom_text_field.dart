@@ -5,6 +5,7 @@ class CustomTextField extends StatelessWidget {
   final String labelText;
   final Widget trailing;
   final void Function(String) onSubmit, onChanged;
+
   CustomTextField({
     this.labelText,
     this.controller,

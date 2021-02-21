@@ -4,22 +4,36 @@ import 'dart:ui';
 import 'package:app/components/button.dart';
 import 'package:app/components/custom_text_field.dart';
 import 'package:app/components/themed_text.dart';
+import 'package:app/global/app_theme.dart';
 import 'package:app/models/session.dart';
 import 'package:app/pages/login/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:http/http.dart' as http;
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   final Session session;
+  LoginPage({@required this.session});
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final TextEditingController usernameController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
   final PanelController panelController = new PanelController();
 
-  LoginPage({@required this.session});
-
   String get username => usernameController.text;
   String get password => passwordController.text;
+
+  bool hidePassword;
+
+  @override
+  void initState() {
+    hidePassword = true;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +45,7 @@ class LoginPage extends StatelessWidget {
       borderRadius: BorderRadius.circular(40),
       defaultPanelState: PanelState.CLOSED,
       panel: SignUpPage(
-        session: session,
+        session: widget.session,
       ),
       body: Scaffold(
         body: Padding(
@@ -59,8 +73,34 @@ class LoginPage extends StatelessWidget {
                 children: [
                   CustomTextField(
                       controller: usernameController, labelText: 'Username'),
-                  CustomTextField(
-                      controller: passwordController, labelText: 'Password'),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12.0, vertical: 8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(14),
+                      child: TextField(
+                        obscureText: hidePassword,
+                        controller: passwordController,
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          border: InputBorder.none,
+                          fillColor: Colors.grey[300],
+                          filled: true,
+                          suffixIcon: TextButton(
+                            style: TextButton.styleFrom(
+                                primary: AppTheme.logoGreen),
+                            child: ThemedText(
+                              hidePassword ? 'Show' : 'Hide',
+                              color: AppTheme.logoGreen,
+                            ),
+                            onPressed: () =>
+                                setState(() => hidePassword = !hidePassword),
+                          ),
+                          labelStyle: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
               SizedBox(
@@ -107,7 +147,7 @@ class LoginPage extends StatelessWidget {
         .then((value) {
       switch (value.statusCode) {
         case 200:
-          session.fromSetCookie(value.headers['set-cookie']);
+          widget.session.fromSetCookie(value.headers['set-cookie']);
           return Navigator.of(context).pushNamed('/home');
         default:
           print(value.body);
