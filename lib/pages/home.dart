@@ -19,7 +19,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    super.initState();
+
+    print("ITINST STATE");
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print('BUILDDD');
     return Scaffold(
       body: CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
@@ -44,6 +52,8 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         tabBuilder: (c, i) {
+          print(i);
+
           try {
             switch (i) {
               case 0:

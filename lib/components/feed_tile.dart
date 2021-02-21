@@ -1,6 +1,5 @@
 import 'package:app/components/themed_text.dart';
 import 'package:app/global/app_theme.dart';
-import 'package:app/models/cook_profile.dart';
 import 'package:app/models/item.dart';
 import 'package:app/pages/feed/item_info.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +40,7 @@ class FeedTile extends StatelessWidget {
                   height: 180,
                   width: MediaQuery.of(context).size.width,
                 ),
-                tag: item.itemID,
+                tag: item.itemID ?? 'sdfsdg',
               ),
               Padding(
                 padding: EdgeInsets.all(8),
