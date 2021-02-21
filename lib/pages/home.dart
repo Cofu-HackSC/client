@@ -1,4 +1,5 @@
 import 'package:app/models/cook_profile.dart';
+import 'package:app/models/item.dart';
 import 'package:app/models/session.dart';
 import 'package:app/global/app_theme.dart';
 import 'package:app/pages/cook_profile.dart';
@@ -57,7 +58,20 @@ class _HomePageState extends State<HomePage> {
           try {
             switch (i) {
               case 0:
-                return FeedPage();
+                return FutureBuilder<List<Item>>(
+                  builder: (c, s) {
+                    if (s.connectionState != ConnectionState.done ||
+                        !s.hasData ||
+                        s.data == null) {
+                      return Container();
+                    } else {
+                      return FeedPage(
+                        s.data,
+                      );
+                    }
+                  },
+                  future: Item.load(widget.session),
+                );
               case 1:
                 return OrdersPage();
               case 2:

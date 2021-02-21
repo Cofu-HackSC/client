@@ -34,8 +34,8 @@ class FeedTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Hero(
-                child: Image.asset(
-                  'assets/${item.photoURL}',
+                child: Image.network(
+                  item.photoURL,
                   fit: BoxFit.cover,
                   height: 180,
                   width: MediaQuery.of(context).size.width,

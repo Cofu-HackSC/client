@@ -143,8 +143,8 @@ class _ItemInfoPageState extends State<ItemInfoPage> {
       body: Stack(
         children: [
           Hero(
-            child: Image.asset(
-              'assets/${widget.item.photoURL}',
+            child: Image.network(
+              widget.item.photoURL,
               fit: BoxFit.cover,
               height: double.infinity,
             ),

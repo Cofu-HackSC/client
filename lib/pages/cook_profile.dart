@@ -14,35 +14,12 @@ class CookProfilePage extends StatelessWidget {
   final CookProfile cook;
   final bool isMe;
   final bool showBack;
+
   CookProfilePage(
     this.cook, {
     this.showBack = true,
     this.isMe = false,
   });
-
-  final List<Item> items = [
-    new Item(
-      itemID: 'sdgsdgsdgesr',
-      sellerID: 'sdgsdg',
-      photoURL: 'example_img.jpg',
-      name: 'Jason\'s Pretzels',
-      avgItemRating: 4.6,
-      delivery: true,
-      pickup: true,
-      ingredients: 'Flour, Milk, Yeast, Olive Oil, Sugar, Salt, Baking Soda',
-      description: 'A yummy yummy for your tummy treat made by yours truely.',
-      cost: 1.60,
-      stock: 16,
-      cook: CookProfile(
-        name: 'Jason Telanoff',
-        bio: 'Likes Eating... A lot',
-        address: '1234 ThisIsThe Way, Some City',
-        emailContact: true,
-        contact: 'jason.telanoff@gmail.com',
-        id: 'asdfje',
-      ),
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -98,12 +75,25 @@ class CookProfilePage extends StatelessWidget {
               ),
               Divider(),
             ])),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (c, i) => FeedTile(item: items[i]),
-                childCount: items.length,
-              ),
-            )
+            FutureBuilder<List<Item>>(
+                builder: (c, s) {
+                  if (s.connectionState != ConnectionState.done ||
+                      !s.hasData ||
+                      s.data == null) {
+                    return SliverFillRemaining(
+                        child: Center(child: CircularProgressIndicator()));
+                  } else {
+                    return SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (c, i) => FeedTile(item: s.data[i]),
+                        childCount: s.data.length,
+                      ),
+                    );
+                  }
+                },
+                future: Item.load(
+                  Provider.of<Session>(context),
+                )),
           ],
         ));
   }
