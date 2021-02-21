@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:app/components/button.dart';
 import 'package:app/components/header.dart';
 import 'package:app/components/themed_text.dart';
+import 'package:app/global/app_theme.dart';
 import 'package:app/models/session.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -39,10 +41,12 @@ class _ApplicationState extends State<Application> {
             delegate: SliverChildListDelegate(
               [
                 ThemedText('License'),
+                DocumentTile(),
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Button('Click here to upload your license',
                       onPressed: () {
+                    print(widget.session.session);
                     try {
                       print('Started Picture');
                       ImagePicker()
@@ -99,6 +103,72 @@ class _ApplicationState extends State<Application> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class DocumentTile extends StatefulWidget {
+  @override
+  _DocumentTileState createState() => _DocumentTileState();
+}
+
+class _DocumentTileState extends State<DocumentTile> {
+  bool hasImage, blurred;
+
+  @override
+  void initState() {
+    hasImage = true;
+    blurred = false;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Column(
+            children: [
+              TextButton(
+                style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                onPressed: () {},
+                child: hasImage
+                    ? ClipRect(
+                        child: Container(
+                          height: 180,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('assets/example_img.jpg'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                            child: Container(
+                              color: Colors.black.withOpacity(0.1),
+                            ),
+                          ),
+                        ),
+                      )
+                    : Container(
+                        height: 180,
+                        width: double.infinity,
+                        color: AppTheme.logoGreen.withAlpha(100),
+                        child: Center(
+                          child: Icon(
+                            Icons.add,
+                            color: AppTheme.primaryText,
+                          ),
+                        ),
+                      ),
+              ),
+              Row(
+                children: [ThemedText('Proof Of Insurance')],
+              )
+            ],
+          )),
     );
   }
 }
