@@ -45,6 +45,7 @@ class CookProfilePage extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 48),
                 child: FloatingActionButton(
                   backgroundColor: AppTheme.logoGreen,
+                  elevation: 0,
                   onPressed: () => Navigator.push(context,
                       MaterialPageRoute(builder: (c) => PostFoodPage())),
                   child: Icon(Icons.add),
@@ -84,9 +85,11 @@ class CookProfilePage extends StatelessWidget {
               Divider(),
             ])),
             SliverList(
-                delegate: SliverChildBuilderDelegate(
-                    (c, i) => FeedTile(item: items[i]),
-                    childCount: items.length))
+              delegate: SliverChildBuilderDelegate(
+                (c, i) => FeedTile(item: items[i]),
+                childCount: items.length,
+              ),
+            )
           ],
         ));
   }
