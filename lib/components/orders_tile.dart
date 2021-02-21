@@ -3,7 +3,8 @@ import 'package:app/global/app_theme.dart';
 import 'package:app/models/cook_profile.dart';
 import 'package:app/models/item.dart';
 import 'package:app/models/sale.dart';
-import 'package:app/pages/item_info.dart';
+import 'package:app/pages/feed/item_info.dart';
+import 'package:app/pages/orders/order_info.dart';
 import 'package:flutter/material.dart';
 
 class OrderTile extends StatelessWidget {
@@ -19,8 +20,8 @@ class OrderTile extends StatelessWidget {
           context,
           MaterialPageRoute(
             fullscreenDialog: true,
-            builder: (c) => ItemInfoPage(
-              item: sale.item,
+            builder: (c) => OrderInfoPage(
+              sale: sale,
             ),
           ),
         ),
@@ -62,7 +63,7 @@ class OrderTile extends StatelessWidget {
                                   type: Type.h2,
                                 ),
                                 ThemedText(
-                                  '${sale.pickup ? 'Pickup' : 'Delivery'}',
+                                  sale.pickup ? 'Pickup' : 'Delivery',
                                   type: Type.subtitle,
                                 ),
                               ],
@@ -101,6 +102,7 @@ class OrderTile extends StatelessWidget {
                 Positioned(
                   right: 8,
                   child: FloatingActionButton(
+                    tooltip: 'Fulfilled',
                     mini: true,
                     child: Icon(Icons.check),
                     onPressed: () {},

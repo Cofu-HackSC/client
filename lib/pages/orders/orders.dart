@@ -47,7 +47,7 @@ class _OrdersPageState extends State<OrdersPage> {
         amount: 3,
         buyer: new User(),
         buyerID: 'aje;fj ',
-        fulfilled: false,
+        fulfilled: true,
         hide: false,
         pickup: true,
         rating: null,

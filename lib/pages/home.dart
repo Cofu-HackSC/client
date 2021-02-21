@@ -4,9 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:app/pages/settings.dart';
 import 'package:flutter/material.dart';
 
-import 'feed.dart';
-import 'order.dart';
-import 'orders.dart';
+import 'feed/feed.dart';
+import 'feed/order.dart';
+import 'orders/orders.dart';
 
 class HomePage extends StatefulWidget {
   final Session session;

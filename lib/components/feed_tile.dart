@@ -2,7 +2,7 @@ import 'package:app/components/themed_text.dart';
 import 'package:app/global/app_theme.dart';
 import 'package:app/models/cook_profile.dart';
 import 'package:app/models/item.dart';
-import 'package:app/pages/item_info.dart';
+import 'package:app/pages/feed/item_info.dart';
 import 'package:flutter/material.dart';
 
 class FeedTile extends StatelessWidget {

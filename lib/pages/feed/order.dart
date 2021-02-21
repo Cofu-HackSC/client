@@ -4,8 +4,8 @@ import 'package:app/components/themed_text.dart';
 import 'package:app/models/item.dart';
 import 'package:flutter/material.dart';
 
-import '../components/button.dart';
-import '../components/themed_text.dart';
+import '../../components/button.dart';
+import '../../components/themed_text.dart';
 
 class OrderPage extends StatefulWidget {
   final Item item;
