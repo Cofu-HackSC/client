@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:app/components/button.dart';
 import 'package:app/components/custom_text_field.dart';
+import 'package:app/components/spaced_row.dart';
 import 'package:app/components/themed_text.dart';
 import 'package:app/global/app_theme.dart';
 import 'package:app/models/session.dart';
@@ -31,12 +32,11 @@ class _PostFoodPageState extends State<PostFoodPage> {
   PanelController controller;
 
   final TextEditingController nameController = TextEditingController();
-  bool pickup = true;
-  bool delivery = false;
+  bool pickup = true, delivery = false;
+  int stock;
   final TextEditingController costController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController ingredientsController = TextEditingController();
-  final TextEditingController stockController = TextEditingController();
 
   File image;
 
@@ -119,6 +119,24 @@ class _PostFoodPageState extends State<PostFoodPage> {
                     ],
                   ),
                 ),
+                SpacedRow(
+                  ThemedText('Order Quantity'),
+                  Row(children: [
+                    IconButton(
+                      icon: Icon(Icons.arrow_drop_down),
+                      onPressed: () => setState(() {
+                        if (stock > 1) stock--;
+                      }),
+                    ),
+                    ThemedText(stock.toString()),
+                    IconButton(
+                      icon: Icon(Icons.arrow_drop_up),
+                      onPressed: () => setState(() {
+                        stock++;
+                      }),
+                    ),
+                  ]),
+                ),
                 Divider(),
                 CustomTextField(
                   labelText: 'Cost',
@@ -126,7 +144,6 @@ class _PostFoodPageState extends State<PostFoodPage> {
                     Icons.attach_money,
                   ),
                 ),
-                // Delivery and pickup
                 Divider(),
                 TextButton(
                   onPressed: () => Navigator.push(
@@ -169,10 +186,6 @@ class _PostFoodPageState extends State<PostFoodPage> {
                 CustomTextField(
                   labelText: 'Ingredients',
                   controller: ingredientsController,
-                ),
-                CustomTextField(
-                  labelText: 'Stock',
-                  controller: stockController,
                 ),
                 Divider(),
                 SizedBox(height: 32),
