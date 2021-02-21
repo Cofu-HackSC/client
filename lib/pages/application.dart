@@ -40,7 +40,6 @@ class _ApplicationState extends State<Application> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                ThemedText('License'),
                 DocumentTile('Proof of Insurance', widget.session),
                 DocumentTile('Cottage Food License', widget.session),
               ],
@@ -74,7 +73,7 @@ class _DocumentTileState extends State<DocumentTile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(16),
       child: ClipRRect(
           borderRadius: BorderRadius.circular(12),
           child: Container(
