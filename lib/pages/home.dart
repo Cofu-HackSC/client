@@ -2,14 +2,11 @@ import 'package:app/models/cook_profile.dart';
 import 'package:app/models/session.dart';
 import 'package:app/global/app_theme.dart';
 import 'package:app/pages/cook_profile.dart';
-import 'package:app/pages/post_food.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:app/pages/settings.dart';
 import 'package:flutter/material.dart';
 
 import 'feed/feed.dart';
-import 'feed/item_info.dart';
-import 'feed/order.dart';
 import 'orders/orders.dart';
 
 class HomePage extends StatefulWidget {
@@ -61,21 +58,16 @@ class _HomePageState extends State<HomePage> {
                     return Container();
                   } else {
                     print(s.data);
-                    return CookProfilePage(s.data);
+                    return CookProfilePage(
+                      s.data,
+                      showBack: false,
+                      isMe: true,
+                    );
                   }
                 },
                 future: CookProfile.load(widget.session),
               );
-              return CookProfilePage(
-                CookProfile(
-                  name: 'ben swerd',
-                  id: 'asfasfasf',
-                  bio: 'I make too many pretzels',
-                  address: '1327 August Drive',
-                  location: 'cool land',
-                ),
-                showBack: false,
-              );
+
             default:
               return SettingsPage();
           }

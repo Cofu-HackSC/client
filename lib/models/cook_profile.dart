@@ -45,16 +45,11 @@ class CookProfile extends User {
         await get('https://cofu-305406.wl.r.appspot.com/me', headers: {
       'Cookie': 'connect.sid=' + session.session,
     });
-    print("RESPONSE");
-    print(json.body);
     try {
       CookProfile profile = CookProfile.fromJSON(jsonDecode(json.body)[0]);
-      print("profile");
 
-      print(profile);
       return profile;
     } catch (e) {
-      print(e);
       throw e;
     }
   }
