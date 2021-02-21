@@ -17,7 +17,7 @@ class Item {
     @required this.ingredients,
     @required this.description,
     @required this.cost,
-    this.avgItemRating,
+    @required this.avgItemRating,
     @required this.stock,
     @required this.delivery,
     @required this.pickup,

@@ -19,7 +19,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    super.initState();
+
+    print("ITINST STATE");
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print('BUILDDD');
     return Scaffold(
       body: CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
@@ -44,30 +52,38 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         tabBuilder: (c, i) {
-          switch (i) {
-            case 0:
-              return FeedPage();
-            case 1:
-              return OrdersPage();
-            case 2:
-              return FutureBuilder<CookProfile>(
-                builder: (c, s) {
-                  if (s.connectionState != ConnectionState.done ||
-                      !s.hasData ||
-                      s.data == null) {
-                    return Container();
-                  } else {
-                    return CookProfilePage(
-                      s.data,
-                      showBack: false,
-                      isMe: true,
-                    );
-                  }
-                },
-                future: CookProfile.load(widget.session),
-              );
-            default:
-              return SettingsPage();
+          print(i);
+
+          try {
+            switch (i) {
+              case 0:
+                return FeedPage();
+              case 1:
+                return OrdersPage();
+              case 2:
+                return FutureBuilder<CookProfile>(
+                  builder: (c, s) {
+                    if (s.connectionState != ConnectionState.done ||
+                        !s.hasData ||
+                        s.data == null) {
+                      return Container();
+                    } else {
+                      return CookProfilePage(
+                        s.data,
+                        showBack: false,
+                        isMe: true,
+                      );
+                    }
+                  },
+                  future: CookProfile.load(widget.session),
+                );
+
+              default:
+                return SettingsPage();
+            }
+          } catch (e) {
+            print(e);
+            return Container();
           }
         },
       ),

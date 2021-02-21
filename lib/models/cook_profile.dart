@@ -12,14 +12,14 @@ class CookProfile extends User {
     this.insuranceProofURI,
     this.foodLicenseURI,
     this.deliveryDistance,
-    String id,
-    String name,
-    String bio,
-    String photoURL,
-    String address,
-    String location,
-    bool emailContact,
-    String contact,
+    @required String id,
+    @required String name,
+    @required String bio,
+    @required String photoURL,
+    @required String address,
+    @required String location,
+    @required bool emailContact,
+    @required String contact,
   }) : super(
           id: id,
           name: name,
@@ -50,6 +50,8 @@ class CookProfile extends User {
 
       return profile;
     } catch (e) {
+      print('OK MAYBE THE PROBLEM IS HERE');
+      print(e);
       throw e;
     }
   }

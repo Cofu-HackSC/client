@@ -130,7 +130,11 @@ class _LoginPageState extends State<LoginPage> {
                           child: Button(
                             'Sign In',
                             onPressed: () async {
-                              await login(context);
+                              try {
+                                login(context);
+                              } catch (e) {
+                                print(e);
+                              }
                             },
                           ),
                         ),
@@ -167,8 +171,12 @@ class _LoginPageState extends State<LoginPage> {
         .then((value) {
       switch (value.statusCode) {
         case 200:
+          print('WE LOGGING INNNN');
           widget.session.fromSetCookie(value.headers['set-cookie']);
-          return Navigator.of(context).pushNamed('/home');
+          print('WE LOGGING INNNN 2');
+
+          Navigator.of(context).pushNamed('/home');
+          break;
         default:
           print(value.body);
           print(value.statusCode);
