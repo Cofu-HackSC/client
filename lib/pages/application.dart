@@ -128,26 +128,33 @@ class _DocumentTileState extends State<DocumentTile> {
             children: [
               TextButton(
                 style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                onPressed: () {},
+                onPressed: () {
+                  if (hasImage) setState(() => blurred = !blurred);
+                },
                 child: hasImage
-                    ? ClipRect(
-                        child: Container(
-                          height: 180,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage('assets/example_img.jpg'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    ? blurred
+                        ? ClipRect(
                             child: Container(
-                              color: Colors.black.withOpacity(0.1),
+                              height: 180,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage('assets/example_img.jpg'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              child: BackdropFilter(
+                                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 8),
+                                child: Container(
+                                  color: Colors.black.withOpacity(0.1),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      )
+                          )
+                        : Image.asset('assets/example_img.jpg',
+                            height: 180,
+                            width: double.infinity,
+                            fit: BoxFit.cover)
                     : Container(
                         height: 180,
                         width: double.infinity,
@@ -162,7 +169,8 @@ class _DocumentTileState extends State<DocumentTile> {
               ),
               Row(
                 children: [ThemedText('Proof Of Insurance')],
-              )
+              ),
+              SizedBox(height: 8)
             ],
           )),
     );
