@@ -164,28 +164,42 @@ class _PostFoodPageState extends State<PostFoodPage> {
           ),
         ),
       ),
-      body: Stack(
-        children: [
-          Image.asset(
-            'assets/background.png',
-            fit: BoxFit.cover,
-            height: double.infinity,
-          ),
-          AppBar(
-            automaticallyImplyLeading: false,
-            leading: IconButton(
-              icon: Icon(
-                Icons.chevron_left,
-                color: AppTheme.primaryText,
-                size: 40,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
+      body: TextButton(
+        onPressed: () {
+          // Add image
+        },
+        child: Stack(
+          children: [
+            Image.asset(
+              'assets/background.png',
+              fit: BoxFit.cover,
+              height: double.infinity,
             ),
-            backgroundColor: Color(0x00),
-          ),
-        ],
+            SizedBox(
+              height: MediaQuery.of(context).size.height - 500,
+              child: Center(
+                  child: Icon(
+                Icons.camera_alt,
+                size: 60,
+                color: AppTheme.primary,
+              )),
+            ),
+            AppBar(
+              automaticallyImplyLeading: false,
+              leading: IconButton(
+                icon: Icon(
+                  Icons.chevron_left,
+                  color: AppTheme.primaryText,
+                  size: 40,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              backgroundColor: Color(0x00),
+            ),
+          ],
+        ),
       ),
     ));
   }
