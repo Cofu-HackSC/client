@@ -36,7 +36,7 @@ class FeedTile extends StatelessWidget {
             children: [
               Hero(
                 child: Image.asset(
-                  'assets/example_img.jpg',
+                  'assets/${item.photoURL}',
                   fit: BoxFit.cover,
                   height: 180,
                   width: MediaQuery.of(context).size.width,

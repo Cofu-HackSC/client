@@ -144,7 +144,7 @@ class _ItemInfoPageState extends State<ItemInfoPage> {
         children: [
           Hero(
             child: Image.asset(
-              'assets/example_img.jpg',
+              'assets/${widget.item.photoURL}',
               fit: BoxFit.cover,
               height: double.infinity,
             ),
