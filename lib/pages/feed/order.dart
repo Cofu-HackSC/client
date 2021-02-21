@@ -1,8 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:app/components/header.dart';
 import 'package:app/components/spaced_row.dart';
 import 'package:app/components/themed_text.dart';
 import 'package:app/models/item.dart';
 import 'package:flutter/material.dart';
+import 'package:stripe_payment/stripe_payment.dart';
 
 import '../../components/button.dart';
 import '../../components/themed_text.dart';
@@ -101,7 +105,15 @@ class _OrderPageState extends State<OrderPage> {
             child: Button(
               'Place Order',
               onPressed: () {
-                // Place Order
+                StripePayment.createTokenWithCard(
+                  CreditCard(
+                    number: '4000002760003184',
+                    expMonth: 12,
+                    expYear: 21,
+                  ),
+                ).then((token) {
+                  print('Received ${token.tokenId}');
+                });
               },
             ),
           ),
