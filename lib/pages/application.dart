@@ -76,7 +76,9 @@ class _ApplicationState extends State<Application> {
                       await res.stream
                           .drain()
                           .then((value) => print(value))
-                          .then((value) => Navigator.pop(context));
+                          .then(
+                            (value) => Navigator.pop(context),
+                          );
                     });
                   }),
                 )
