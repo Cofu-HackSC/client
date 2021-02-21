@@ -4,11 +4,12 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;
   final Widget trailing;
-  final void Function(String) onSubmit;
+  final void Function(String) onSubmit, onChanged;
   CustomTextField({
-    @required this.controller,
-    @required this.labelText,
+    this.labelText,
+    this.controller,
     this.onSubmit,
+    this.onChanged,
     this.trailing,
   });
 
@@ -21,6 +22,7 @@ class CustomTextField extends StatelessWidget {
         child: TextField(
           controller: controller,
           onSubmitted: onSubmit,
+          onChanged: onChanged,
           decoration: InputDecoration(
             labelText: labelText,
             border: InputBorder.none,

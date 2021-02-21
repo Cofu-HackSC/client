@@ -1,10 +1,12 @@
 import 'package:app/models/session.dart';
 import 'package:app/global/app_theme.dart';
+import 'package:app/pages/post_food.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:app/pages/settings.dart';
 import 'package:flutter/material.dart';
 
 import 'feed/feed.dart';
+import 'feed/item_info.dart';
 import 'feed/order.dart';
 import 'orders/orders.dart';
 
@@ -43,7 +45,8 @@ class _HomePageState extends State<HomePage> {
             case 0:
               return FeedPage();
             case 1:
-              return OrdersPage();
+              return PostFoodPage();
+            // return OrdersPage();
             default:
               return SettingsPage();
           }
