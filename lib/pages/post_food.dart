@@ -64,7 +64,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
         topLeft: Radius.circular(16),
         topRight: Radius.circular(16),
       ),
-      color: AppTheme.backgroundLighGray,
+      color: AppTheme.backgroundLighGray.withOpacity(0.96),
       minHeight: 0,
       maxHeight: 570,
       parallaxEnabled: true,
@@ -140,6 +140,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                 Divider(),
                 CustomTextField(
                   labelText: 'Cost',
+                  controller: costController,
                   trailing: Icon(
                     Icons.attach_money,
                   ),
@@ -170,8 +171,10 @@ class _PostFoodPageState extends State<PostFoodPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           ThemedText(widget.profile.name),
-                          ThemedText('View your profile >',
-                              type: Type.subtitle),
+                          ThemedText(
+                            'View your profile ➡️',
+                            type: Type.subtitle,
+                          ),
                         ],
                       ),
                     ],
@@ -195,9 +198,35 @@ class _PostFoodPageState extends State<PostFoodPage> {
                     width: double.infinity,
                     child: Button(
                       'Post',
-                      onPressed: () {
-                        post('https://cofu-305406.wl.r.appspot.com/item',
-                            headers: {});
+                      onPressed: () async {
+                        MultipartRequest req = MultipartRequest(
+                          'POST',
+                          Uri.parse(
+                            'https://cofu-305406.wl.r.appspot.com/item',
+                          ),
+                        );
+                        req.headers['Cookie'] =
+                            'connect.sid=' + widget.session.session;
+
+                        req.fields.addAll({
+                          'name': nameController.text,
+                          'pickup': pickup.toString(),
+                          'delivery': delivery.toString(),
+                          'cost': costController.text,
+                          'description': descriptionController.text,
+                          'ingredients': ingredientsController.text,
+                          'stock': stockController.text,
+                        });
+
+                        req.files.add(
+                          await MultipartFile.fromPath(
+                            'file',
+                            image.path,
+                          ),
+                        );
+
+                        req.send();
+
                         showCupertinoDialog(
                           context: context,
                           builder: (c) => CupertinoAlertDialog(
