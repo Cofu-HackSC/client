@@ -115,18 +115,11 @@ class _DocumentTileState extends State<DocumentTile> {
                           );
                           print('here 3');
                           var res = await req.send();
-
-                          print('RESPONSE');
-                          print(res.statusCode);
-                          print(res.reasonPhrase);
-
-                          await res.stream
-                              .drain()
-                              .then((value) =>
-                                  print("VALUEEE " + value.toString()))
-                              .then(
-                                (value) => Navigator.pop(context),
-                              );
+                          res.stream.listen((value) => print(value));
+                          res.stream.drain().then((value) {
+                            print("ITS F**KING DONE");
+                            print(value);
+                          });
                         });
                       } catch (e) {
                         print('ERROROROROROORORORO');
