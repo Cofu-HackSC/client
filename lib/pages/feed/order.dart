@@ -25,6 +25,9 @@ class _OrderPageState extends State<OrderPage> {
 
   void initState() {
     quantity = 1;
+    StripePayment.setOptions(StripeOptions(
+        publishableKey:
+            "pk_test_51INA9tALO3GW63f2OEu3lZmRCgEHBVsXSCfmiliK2mWbj9Kab2iOjf3oEE99EjADwB98kxE7uQ1wJYlyf4GfQLFE00SDgsA1dp"));
     super.initState();
   }
 
@@ -112,7 +115,8 @@ class _OrderPageState extends State<OrderPage> {
                     expYear: 21,
                   ),
                 ).then((token) {
-                  print('Received ${token.tokenId}');
+                  print(token.tokenId);
+                  Navigator.pop(context);
                 });
               },
             ),

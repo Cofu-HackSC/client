@@ -110,13 +110,7 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
               width: double.infinity,
               child: Button(
                 'Cancel Order',
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (c) => OrderPage(
-                              widget.sale.item,
-                              pickup: false,
-                            ))),
+                onPressed: () => print('no'),
               ),
             ),
           ],

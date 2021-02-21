@@ -288,7 +288,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
               Image.file(
                 image,
                 height: double.infinity,
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
             AppBar(
               automaticallyImplyLeading: false,
