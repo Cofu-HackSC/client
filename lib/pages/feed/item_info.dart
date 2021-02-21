@@ -57,9 +57,12 @@ class _ItemInfoPageState extends State<ItemInfoPage> {
             ),
             Stars(widget.item.avgItemRating),
             Divider(),
-            ThemedText('\$' + widget.item.cost.toStringAsFixed(2)),
             ThemedText(
                 '${widget.item.delivery ? widget.item.pickup ? 'Delivery and Pickup' : 'Delivery' : widget.item.pickup ? 'Pickup' : 'Error'}'),
+            SizedBox(height: 4),
+            ThemedText('\$' + widget.item.cost.toStringAsFixed(2)),
+            SizedBox(height: 4),
+            ThemedText('Stock: ${widget.item.stock}'),
             Divider(),
             TextButton(
               onPressed: () => Navigator.push(
