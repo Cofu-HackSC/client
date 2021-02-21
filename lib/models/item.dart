@@ -30,7 +30,7 @@ class Item {
 
   factory Item.fromJSON(dynamic json) => Item(
       avgItemRating: double.parse(json['averageitemrating'] ?? '0'),
-      cook: new CookProfile(),
+      cook: new CookProfile(name: 'Jason Telanoff', id: '1912'),
       cost: double.parse(json['cost']),
       delivery: json['delivery'],
       description: json['description'],
