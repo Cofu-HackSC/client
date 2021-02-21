@@ -182,7 +182,9 @@ class _PostFoodPageState extends State<PostFoodPage> {
         onPressed: () {
           print('image');
           ImagePicker().getImage(source: ImageSource.camera).then((value) {
-            image = File(value.path);
+            setState(() {
+              image = File(value.path);
+            });
           });
           // Add image
         },
