@@ -13,12 +13,12 @@ import 'cook_profile.dart';
 CookProfile me = new CookProfile(
   id: 'ejf;eji;ef ',
   name: 'Jason Telanoff',
-  // bio: 'This is my bio',
-  // photoURL: 'url',
-  // address: '',
-  // location: '',
-  // emailContact: true,
-  // contact: '',
+  bio: 'This is my bio',
+  photoURL: 'url',
+  address: '1834 12th Street, Santa Monica, CA',
+  location: '',
+  emailContact: true,
+  contact: 'jason.telanoff@gmail.com',
 );
 
 class PostFoodPage extends StatefulWidget {
