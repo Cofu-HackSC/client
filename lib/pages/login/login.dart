@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                   centerTitle: true,
                   titlePadding: EdgeInsets.only(bottom: 60),
                   title: Image.asset(
-                    'assets/CofuLOGO.png',
+                    'assets/CofuLOGObg.png',
                     height: MediaQuery.of(context).size.height / 5,
                   ),
                 ),
