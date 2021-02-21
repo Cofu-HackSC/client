@@ -80,6 +80,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                     children: [
                       ThemedText('Pickup'),
                       Switch(
+                        activeColor: AppTheme.logoGreen,
                         onChanged: (bool value) =>
                             setState(() => item.pickup = value),
                         value: item.pickup,
@@ -94,6 +95,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                     children: [
                       ThemedText('Delivery'),
                       Switch(
+                        activeColor: AppTheme.logoGreen,
                         onChanged: (bool value) =>
                             setState(() => item.delivery = value),
                         value: item.delivery,
