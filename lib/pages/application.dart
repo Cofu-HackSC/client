@@ -85,6 +85,7 @@ class _ApplicationState extends State<Application> {
                             );
                       });
                     } catch (e) {
+                      print('ERROROROROROORORORO');
                       print(e);
                     }
                   }),
