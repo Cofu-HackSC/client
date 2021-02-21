@@ -10,7 +10,8 @@ import '../models/item.dart';
 
 class CookProfilePage extends StatelessWidget {
   final CookProfile cook;
-  CookProfilePage(this.cook);
+  final bool showBack;
+  CookProfilePage(this.cook, {this.showBack = true});
 
   final List<Item> items = [
     new Item(
@@ -54,7 +55,7 @@ class CookProfilePage extends StatelessWidget {
           slivers: [
             Header(
               cook.name,
-              showBack: true,
+              showBack: showBack,
             ),
             SliverList(
                 delegate: SliverChildListDelegate([

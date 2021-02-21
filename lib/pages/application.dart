@@ -47,6 +47,51 @@ class _ApplicationState extends State<Application> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          try {
+            print('Started Picture');
+            ImagePicker()
+                .getImage(source: ImageSource.camera)
+                .then((img1) async {
+              ImagePicker()
+                  .getImage(source: ImageSource.camera)
+                  .then((img2) async {
+                print('Finished Picture');
+
+                MultipartRequest req = MultipartRequest(
+                  'POST',
+                  Uri.parse(
+                    'https://cofu-305406.wl.r.appspot.com/application',
+                  ),
+                );
+                print('here 1');
+                req.headers['Cookie'] = 'connect.sid=' + widget.session.session;
+                print('here 2');
+
+                req.files.add(
+                  MultipartFile(
+                    'file',
+                    File(img1.path).readAsBytes().asStream(),
+                    File(img1.path).lengthSync(),
+                    filename: img1.path.split("/").last,
+                  ),
+                );
+                print('here 3');
+                var res = await req.send();
+                res.stream.listen((value) => print(value));
+                res.stream.drain().then((value) {
+                  print("ITS F**KING DONE");
+                  print(value);
+                });
+              });
+            });
+          } catch (e) {
+            print('ERROROROROROORORORO');
+            print(e);
+          }
+        },
+      ),
     );
   }
 }
@@ -81,88 +126,41 @@ class _DocumentTileState extends State<DocumentTile> {
             child: Column(
               children: [
                 TextButton(
-                  style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                  onPressed: () {
-                    if (hasImage)
-                      setState(() => blurred = !blurred);
-                    else {
-                      try {
-                        print('Started Picture');
-                        ImagePicker()
-                            .getImage(source: ImageSource.camera)
-                            .then((value) async {
-                          print('Finished Picture');
-
-                          MultipartRequest req = MultipartRequest(
-                            'POST',
-                            Uri.parse(
-                              'https://cofu-305406.wl.r.appspot.com/application',
-                            ),
-                          );
-                          print('here 1');
-                          req.headers['Cookie'] =
-                              'connect.sid=' + widget.session.session;
-                          print('here 2');
-
-                          req.files.add(
-                            MultipartFile(
-                              'file',
-                              File(value.path).readAsBytes().asStream(),
-                              File(value.path).lengthSync(),
-                              filename: value.path.split("/").last,
-                            ),
-                          );
-                          print('here 3');
-                          var res = await req.send();
-                          res.stream.listen((value) => print(value));
-                          res.stream.drain().then((value) {
-                            print("ITS F**KING DONE");
-                            print(value);
-                          });
-                        });
-                      } catch (e) {
-                        print('ERROROROROROORORORO');
-                        print(e);
-                      }
-                    }
-                  },
-                  child: hasImage
-                      ? blurred
-                          ? ClipRect(
-                              child: Container(
+                    style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                    onPressed: () {
+                      if (hasImage) setState(() => blurred = !blurred);
+                    },
+                    child: hasImage
+                        ? blurred
+                            ? ClipRect(
+                                child: Container(
+                                  height: 180,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image:
+                                          AssetImage('assets/example_img.jpg'),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  child: BackdropFilter(
+                                    filter:
+                                        ImageFilter.blur(sigmaX: 10, sigmaY: 8),
+                                    child: Container(
+                                      color: Colors.black.withOpacity(0.1),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Image.asset('assets/example_img.jpg',
                                 height: 180,
                                 width: double.infinity,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage('assets/example_img.jpg'),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                child: BackdropFilter(
-                                  filter:
-                                      ImageFilter.blur(sigmaX: 10, sigmaY: 8),
-                                  child: Container(
-                                    color: Colors.black.withOpacity(0.1),
-                                  ),
-                                ),
-                              ),
-                            )
-                          : Image.asset('assets/example_img.jpg',
-                              height: 180,
-                              width: double.infinity,
-                              fit: BoxFit.cover)
-                      : Container(
-                          height: 180,
-                          width: double.infinity,
-                          color: AppTheme.logoGreen.withAlpha(100),
-                          child: Center(
-                            child: Icon(
-                              Icons.add,
-                              color: AppTheme.primaryText,
-                            ),
-                          ),
-                        ),
-                ),
+                                fit: BoxFit.cover)
+                        : Image.asset('assets/background.png',
+                            height: 180,
+                            width: double.infinity,
+                            fit: BoxFit.cover)),
+                Divider(),
                 Row(
                   children: [ThemedText(widget.name)],
                 ),

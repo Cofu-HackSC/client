@@ -52,7 +52,10 @@ class _HomePageState extends State<HomePage> {
             case 1:
               return OrdersPage();
             case 2:
-              return CookProfilePage(me);
+              return CookProfilePage(
+                me,
+                showBack: false,
+              );
             default:
               return SettingsPage();
           }
