@@ -4,44 +4,46 @@ import 'package:app/components/button.dart';
 import 'package:app/components/custom_text_field.dart';
 import 'package:app/components/themed_text.dart';
 import 'package:app/global/app_theme.dart';
-import 'package:app/models/item.dart';
-import 'package:app/pages/feed/order.dart';
+import 'package:app/models/session.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import '../models/cook_profile.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import 'cook_profile.dart';
 
-CookProfile me = new CookProfile(
-  id: 'ejf;eji;ef ',
-  name: 'Jason Telanoff',
-  bio: 'This is my bio',
-  photoURL: 'url',
-  address: '1834 12th Street, Santa Monica, CA',
-  location: '',
-  emailContact: true,
-  contact: 'jason.telanoff@gmail.com',
-);
-
 class PostFoodPage extends StatefulWidget {
+  final CookProfile profile;
+  final Session session;
+
+  const PostFoodPage({
+    @required this.profile,
+    @required this.session,
+  });
+
   @override
   _PostFoodPageState createState() => _PostFoodPageState();
 }
 
 class _PostFoodPageState extends State<PostFoodPage> {
   PanelController controller;
-  Item item;
+
+  final TextEditingController nameController = TextEditingController();
+  bool pickup = true;
+  bool delivery = false;
+  final TextEditingController costController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController ingredientsController = TextEditingController();
+  final TextEditingController stockController = TextEditingController();
 
   File image;
 
   @override
   void initState() {
     controller = new PanelController();
-    item = new Item(
-      pickup: false,
-      delivery: false,
-    );
+
     openPanel();
     super.initState();
   }
@@ -79,6 +81,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
               children: [
                 CustomTextField(
                   labelText: 'Name',
+                  controller: nameController,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -88,9 +91,12 @@ class _PostFoodPageState extends State<PostFoodPage> {
                       ThemedText('Pickup'),
                       Switch.adaptive(
                         activeColor: AppTheme.logoGreen,
-                        onChanged: (bool value) =>
-                            setState(() => item.pickup = value),
-                        value: item.pickup,
+                        onChanged: (bool value) => setState(
+                          () {
+                            pickup = value;
+                          },
+                        ),
+                        value: pickup,
                       ),
                     ],
                   ),
@@ -103,9 +109,12 @@ class _PostFoodPageState extends State<PostFoodPage> {
                       ThemedText('Delivery'),
                       Switch.adaptive(
                         activeColor: AppTheme.logoGreen,
-                        onChanged: (bool value) =>
-                            setState(() => item.delivery = value),
-                        value: item.delivery,
+                        onChanged: (bool value) => setState(
+                          () {
+                            delivery = value;
+                          },
+                        ),
+                        value: delivery,
                       ),
                     ],
                   ),
@@ -120,12 +129,18 @@ class _PostFoodPageState extends State<PostFoodPage> {
                 // Delivery and pickup
                 Divider(),
                 TextButton(
-                  onPressed: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (c) => CookProfilePage(me))),
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (c) => CookProfilePage(
+                        widget.profile,
+                      ),
+                    ),
+                  ),
                   child: Row(
                     children: [
                       Hero(
-                        tag: me.id,
+                        tag: widget.profile.id,
                         child: ClipOval(
                           child: Image.asset(
                             'assets/example_profile.jpg',
@@ -137,7 +152,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ThemedText(me.name),
+                          ThemedText(widget.profile.name),
                           ThemedText('View your profile >',
                               type: Type.subtitle),
                         ],
@@ -148,10 +163,16 @@ class _PostFoodPageState extends State<PostFoodPage> {
                 Divider(),
                 CustomTextField(
                   labelText: 'Description',
+                  controller: descriptionController,
                 ),
                 Divider(),
                 CustomTextField(
                   labelText: 'Ingredients',
+                  controller: ingredientsController,
+                ),
+                CustomTextField(
+                  labelText: 'Stock',
+                  controller: stockController,
                 ),
                 Divider(),
                 SizedBox(height: 32),
@@ -161,15 +182,27 @@ class _PostFoodPageState extends State<PostFoodPage> {
                     width: double.infinity,
                     child: Button(
                       'Post',
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (c) => OrderPage(
-                            item,
-                            pickup: false,
+                      onPressed: () {
+                        post('https://cofu-305406.wl.r.appspot.com/item',
+                            headers: {});
+                        showCupertinoDialog(
+                          context: context,
+                          builder: (c) => CupertinoAlertDialog(
+                            title: Text(
+                              'We are processing your post',
+                            ),
+                            content:
+                                Text('It will be visible in a few minutes.'),
                           ),
-                        ),
-                      ),
+                        ).then((c) {
+                          Navigator.pop(
+                            c,
+                          );
+                          Navigator.pop(
+                            context,
+                          );
+                        });
+                      },
                     ),
                   ),
                 ),
