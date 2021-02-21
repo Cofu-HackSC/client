@@ -130,7 +130,11 @@ class _LoginPageState extends State<LoginPage> {
                           child: Button(
                             'Sign In',
                             onPressed: () async {
-                              await login(context);
+                              try {
+                                login(context);
+                              } catch (e) {
+                                print(e);
+                              }
                             },
                           ),
                         ),
