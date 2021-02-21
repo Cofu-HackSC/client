@@ -215,7 +215,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                           'cost': costController.text,
                           'description': descriptionController.text,
                           'ingredients': ingredientsController.text,
-                          'stock': stockController.text,
+                          'stock': stock.toString(),
                         });
 
                         req.files.add(
