@@ -72,9 +72,9 @@ class _ApplicationState extends State<Application> {
                 req.files.add(
                   MultipartFile(
                     'file',
-                    File(img1.path).readAsBytes().asStream(),
-                    File(img1.path).lengthSync(),
-                    filename: img1.path.split("/").last,
+                    File(img1?.path).readAsBytes().asStream(),
+                    File(img1?.path).lengthSync(),
+                    filename: img1?.path?.split("/")?.last,
                   ),
                 );
                 print('here 3');

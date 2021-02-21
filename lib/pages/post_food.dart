@@ -225,7 +225,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                           ),
                         );
 
-                        req.send();
+                        await req.send();
 
                         showCupertinoDialog(
                           context: context,
@@ -258,7 +258,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
           print('image');
           ImagePicker().getImage(source: ImageSource.camera).then((value) {
             setState(() {
-              image = File(value.path);
+              image = File(value?.path);
             });
           });
           // Add image
