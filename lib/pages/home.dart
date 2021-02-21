@@ -66,7 +66,6 @@ class _HomePageState extends State<HomePage> {
                 },
                 future: CookProfile.load(widget.session),
               );
-
             default:
               return SettingsPage();
           }

@@ -5,6 +5,9 @@ import 'package:app/components/header.dart';
 import 'package:app/components/spaced_row.dart';
 import 'package:app/components/themed_text.dart';
 import 'package:app/models/item.dart';
+import 'package:app/models/sale.dart';
+import 'package:app/models/user.dart';
+import 'package:app/pages/orders/orders.dart';
 import 'package:flutter/material.dart';
 import 'package:stripe_payment/stripe_payment.dart';
 
@@ -116,6 +119,19 @@ class _OrderPageState extends State<OrderPage> {
                   ),
                 ).then((token) {
                   print(token.tokenId);
+                  orders.add(new Sale(
+                    item: widget.item,
+                    amount: quantity,
+                    buyer: new User(),
+                    buyerID: 'fwhfeiu',
+                    fulfilled: false,
+                    hide: false,
+                    pickup: widget.pickup,
+                    rating: null,
+                    ratingText: '',
+                    saleID: 'erjfdsere',
+                    totalCost: 1.0725 * quantity * widget.item.cost + 1,
+                  ));
                   Navigator.pop(context);
                 });
               },
