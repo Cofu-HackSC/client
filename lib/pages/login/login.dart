@@ -50,82 +50,102 @@ class _LoginPageState extends State<LoginPage> {
       body: Scaffold(
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: ListView(
-            children: [
-              SizedBox(
-                height: 16,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ThemedText(
-                    'Welcome Back',
-                    type: Type.h1,
-                    textAlign: TextAlign.left,
+          child: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                collapsedHeight: 56,
+                expandedHeight: MediaQuery.of(context).size.height / 2.5,
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  titlePadding: EdgeInsets.only(bottom: 60),
+                  title: Image.asset(
+                    'assets/CofuLOGO.png',
+                    height: MediaQuery.of(context).size.height / 5,
                   ),
                 ),
+                backgroundColor: Color(0x00),
               ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 4,
-              ),
-              Column(
-                children: [
-                  CustomTextField(
-                      controller: usernameController, labelText: 'Username'),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12.0, vertical: 8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(14),
-                      child: TextField(
-                        obscureText: hidePassword,
-                        controller: passwordController,
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          border: InputBorder.none,
-                          fillColor: Colors.grey[300],
-                          filled: true,
-                          suffixIcon: TextButton(
-                            style: TextButton.styleFrom(
-                                primary: AppTheme.logoGreen),
-                            child: ThemedText(
-                              hidePassword ? 'Show' : 'Hide',
-                              color: AppTheme.logoGreen,
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    SizedBox(
+                      height: 16,
+                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: SizedBox(
+                    //     width: double.infinity,
+                    //     child: ThemedText(
+                    //       'Welcome Back',
+                    //       type: Type.h1,
+                    //       textAlign: TextAlign.left,
+                    //     ),
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: ,
+                    // ),
+                    Column(
+                      children: [
+                        CustomTextField(
+                            controller: usernameController,
+                            labelText: 'Username'),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12.0, vertical: 8.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(14),
+                            child: TextField(
+                              obscureText: hidePassword,
+                              controller: passwordController,
+                              decoration: InputDecoration(
+                                labelText: 'Password',
+                                border: InputBorder.none,
+                                fillColor: Colors.grey[300],
+                                filled: true,
+                                suffixIcon: TextButton(
+                                  style: TextButton.styleFrom(
+                                      primary: AppTheme.logoGreen),
+                                  child: ThemedText(
+                                    hidePassword ? 'Show' : 'Hide',
+                                    color: AppTheme.logoGreen,
+                                  ),
+                                  onPressed: () => setState(
+                                      () => hidePassword = !hidePassword),
+                                ),
+                                labelStyle: TextStyle(color: Colors.black),
+                              ),
                             ),
-                            onPressed: () =>
-                                setState(() => hidePassword = !hidePassword),
                           ),
-                          labelStyle: TextStyle(color: Colors.black),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 5,
+                    ),
+                    Column(
+                      children: [
+                        SizedBox(
+                          width: double.infinity,
+                          child: Button(
+                            'Sign In',
+                            onPressed: () async {
+                              await login(context);
+                            },
+                          ),
                         ),
-                      ),
+                        SizedBox(height: 8),
+                        TextButton(
+                          child: ThemedText(
+                            'Sign Up',
+                            type: Type.subtitle,
+                          ),
+                          onPressed: () => panelController.open(),
+                        ),
+                      ],
                     ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 4,
-              ),
-              Column(
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    child: Button(
-                      'Sign In',
-                      onPressed: () async {
-                        await login(context);
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  TextButton(
-                    child: ThemedText(
-                      'Sign Up',
-                      type: Type.subtitle,
-                    ),
-                    onPressed: () => panelController.open(),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
